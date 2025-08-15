@@ -1,0 +1,33 @@
+header {
+    background-color: var(--color3);
+    height: 100px;
+    display: flex;
+    padding-inline: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 .5rem 1rem var(--shadow-color);
+}
+
+header .logo {
+    height: 60%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--color1);
+}
+
+header>nav .menu {
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+}
+
+header>nav .menu a {
+    font: normal 1.2rem var(--font1);
+    text-decoration: none;
+    color: var(--color1);
+}
+
+header>nav .menu a:hover {
+    text-decoration: underline;
+}
