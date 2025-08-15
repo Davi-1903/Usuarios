@@ -7,9 +7,30 @@ function SignIn({ changeForm }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShow] = useState(false);
+    const navigate = useNavigate();
 
-    function submit() {
-        // code
+    function submit(e) {
+        e.preventDefault();
+
+        fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include',
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Erro HTTP ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (!data.ok) {
+                    throw new Error(`Erro HTTP`);
+                }
+                navigate(data.redirectTo);
+            })
+            .catch(err => console.error(`Erro HTTP ${err}`));
     }
 
     return (
