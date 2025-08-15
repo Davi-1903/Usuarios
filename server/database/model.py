@@ -15,4 +15,4 @@ class User(UserMixin, db.Model):
 
     @classmethod
     def get(cls, user_id):
-        return db.session.get(cls, int(user_id))
+        return db.session.get(cls, user_id)

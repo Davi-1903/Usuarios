@@ -1,5 +1,6 @@
-import { IconMail, IconEyeOff, IconUser } from '@tabler/icons-react';
 import { useState } from 'react';
+import { IconMail, IconEyeOff, IconUser } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 function SignIn({ changeForm }) {
@@ -59,9 +60,32 @@ function SignUp({ changeForm }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShow] = useState(false);
+    const navigate = useNavigate();
 
-    function submit() {
-        // code
+    function submit(e) {
+        e.preventDefault();
+
+        fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password }),
+            credentials: 'include',
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Erro HTTP ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (!data.ok) {
+                    throw new Error(`Erro HTTP`);
+                }
+                navigate(data.redirectTo);
+            })
+            .catch(err => {
+                console.error('Falha na requisição:', err);
+            });
     }
 
     return (
