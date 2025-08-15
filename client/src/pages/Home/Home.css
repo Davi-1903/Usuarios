@@ -12,12 +12,12 @@
     color: var(--color1);
 }
 
-.text-container > button {
+.text-container button {
     padding: .5rem 2rem;
     background-color: var(--color1);
 }
 
-.text-container > button a {
+.text-container a {
     cursor: default;
     font: normal 1.6rem var(--font2);
     text-decoration: none;

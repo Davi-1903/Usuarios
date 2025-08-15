@@ -14,9 +14,9 @@ def register():
 
     if not user:
         new_user = User(name=data['name'], email=data['email'], password=generate_password_hash(data['password']))
-        login_user(new_user)
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return jsonify({'ok': True, 'redirectTo': '/'}), 200
     return jsonify({'ok': False, 'erro': 'Este email já está cadastrado'}), 401
 

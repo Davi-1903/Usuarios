@@ -16,7 +16,6 @@ function SignIn({ changeForm }) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
-            credentials: 'include',
         })
             .then(res => {
                 if (!res.ok) {
@@ -90,7 +89,6 @@ function SignUp({ changeForm }) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password }),
-            credentials: 'include',
         })
             .then(res => {
                 if (!res.ok) {
