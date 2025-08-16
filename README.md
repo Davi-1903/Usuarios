@@ -31,7 +31,7 @@ Para executar essa brincadeira é pouco complicado, mas vamos lá. Primeiro, é 
     npm run build
     ```
 
-3. **Ainda dentro de `server/`, execute**
+3. **Dentro de `server/`, execute**
 
     ```powershell
     python app.py
