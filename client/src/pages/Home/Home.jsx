@@ -41,7 +41,7 @@ export default function Home() {
                 }
                 setName(data.name);
             })
-            .catch(err => console.error('Erro na requisição:' + err));
+            .catch(err => console.error(err));
     }, []);
 
     return <>{name ? <UserLogin name={name} /> : <UserLogout />}</>;

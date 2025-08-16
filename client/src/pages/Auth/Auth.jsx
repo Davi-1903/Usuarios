@@ -29,7 +29,7 @@ function SignIn({ changeForm }) {
                 }
                 navigate(data.redirectTo);
             })
-            .catch(err => console.error(`Erro HTTP ${err}`));
+            .catch(err => console.error(err));
     }
 
     return (
@@ -102,9 +102,7 @@ function SignUp({ changeForm }) {
                 }
                 navigate(data.redirectTo);
             })
-            .catch(err => {
-                console.error('Falha na requisição:', err);
-            });
+            .catch(err => console.error(err));
     }
 
     return (
