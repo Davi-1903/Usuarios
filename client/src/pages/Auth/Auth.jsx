@@ -9,27 +9,18 @@ function SignIn({ changeForm }) {
     const [showPassword, setShow] = useState(false);
     const navigate = useNavigate();
 
-    function submit(e) {
+    async function submit(e) {
         e.preventDefault();
-
-        fetch('/api/login', {
+        const response = await fetch('/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Erro HTTP ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (!data.ok) {
-                    throw new Error(`Erro HTTP`);
-                }
-                navigate(data.redirectTo);
-            })
-            .catch(err => console.error(err));
+        });
+        const data = await response.json();
+        if (!data.ok) {
+            throw new Error('Erro HTTP');
+        }
+        navigate(data.redirectTo);
     }
 
     return (
@@ -82,27 +73,19 @@ function SignUp({ changeForm }) {
     const [showPassword, setShow] = useState(false);
     const navigate = useNavigate();
 
-    function submit(e) {
+    async function submit(e) {
         e.preventDefault();
 
-        fetch('/api/register', {
+        const response = await fetch('/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password }),
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Erro HTTP ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (!data.ok) {
-                    throw new Error(`Erro HTTP`);
-                }
-                navigate(data.redirectTo);
-            })
-            .catch(err => console.error(err));
+        });
+        const data = await response.json();
+        if (!data.ok) {
+            throw new Error('Erro HTTP');
+        }
+        navigate(data.redirectTo);
     }
 
     return (

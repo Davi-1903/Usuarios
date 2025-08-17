@@ -24,24 +24,17 @@ function UserLogin({ name }) {
 export default function Home() {
     const [name, setName] = useState(null);
 
+    async function getNAme() {
+        const response = await fetch('/user');
+        const data = await response.json();
+        if (!data.ok) {
+            throw new Error('Erro HTTP');
+        }
+        setName(data.name);
+    }
+
     useEffect(() => {
-        fetch('/api/user', {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Erro HTTP ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (!data) {
-                    throw new Error('Erro HTTP');
-                }
-                setName(data.name);
-            })
-            .catch(err => console.error(err));
+        getNAme()
     }, []);
 
     return <>{name ? <UserLogin name={name} /> : <UserLogout />}</>;

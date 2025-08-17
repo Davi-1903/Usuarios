@@ -6,33 +6,28 @@ export default function Header() {
     const [authenticated, setAuthenticated] = useState(false);
     const navigate = useNavigate();
 
-    function logoutUser() {
-        fetch('/api/logout', {
+    async function logoutUser() {
+        const response = await fetch('/logout', {
             method: 'POST',
             credentials: 'include',
-        })
-            .then(res => res.json())
-            .then(data => navigate(data.readirectTo));
+        });
+        const data = await response.json();
+        navigate(data.readirectTo);
+    }
+
+    async function checkUser() {
+        const response = await fetch('/user', {
+            credentials: 'include',
+        });
+        const data = await response.json();
+        if (!data.ok) {
+            throw new Error('Erro HTTP');
+        }
+        setAuthenticated(true);
     }
 
     useEffect(() => {
-        fetch('/api/user', {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Erro HTTP ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (!data.ok) {
-                    throw new Error(`Erro HTTP`);
-                }
-                setAuthenticated(true);
-            })
-            .catch(err => console.error(err));
+        checkUser();
     }, []);
 
     return (
