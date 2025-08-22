@@ -12,12 +12,14 @@ export default function App() {
     const navigate = useNavigate();
 
     async function logoutUser() {
-        const response = await fetch('/api/logout', {
-            credentials: 'include',
-        });
-        const data = await response.json();
-        setAuthenticated(false);
-        navigate(data.redirect);
+        if (confirm('Você tem certeza?')) {
+            const response = await fetch('/api/logout', {
+                credentials: 'include',
+            });
+            const data = await response.json();
+            setAuthenticated(false);
+            navigate(data.redirect);
+        }
     }
 
     const checkUser = useCallback(async () => {

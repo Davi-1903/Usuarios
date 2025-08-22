@@ -52,7 +52,7 @@ export default function SignIn({ changeForm, setAuthenticated }) {
                 <label htmlFor='password'>Password</label>
                 <div className='input-content'>
                     <input
-                        type='password'
+                        type={showPassword ? 'text' : 'password'}
                         id='password'
                         placeholder='Your secret password'
                         required
