@@ -1,6 +1,6 @@
 # Flask + React
 
-Aplicação de login extremamente simples para aprendar a integrar `Flask` com `React`.
+Aplicação de login extremamente simples para aprendar a integrar `Flask` com `React Router`.
 
 ## Como executar
 
