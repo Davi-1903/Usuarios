@@ -3,7 +3,7 @@ import SignIn from './Signin';
 import SignUp from './Signup';
 import './Auth.css';
 
-export default function Auth() {
+export default function Auth({ setAuthenticated }) {
     const [invert, setInvert] = useState(false);
 
     function changeForm() {
@@ -13,8 +13,8 @@ export default function Auth() {
     return (
         <div className='form-content'>
             <div className={`form-container ${invert ? 'invert' : ''}`}>
-                <SignUp changeForm={changeForm} />
-                <SignIn changeForm={changeForm} />
+                <SignUp changeForm={changeForm} setAuthenticated={setAuthenticated} />
+                <SignIn changeForm={changeForm} setAuthenticated={setAuthenticated} />
             </div>
         </div>
     );

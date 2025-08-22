@@ -1,32 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
-export default function Header() {
-    const [authenticated, setAuthenticated] = useState(false);
-    const navigate = useNavigate();
-
-    async function logoutUser() {
-        const response = await fetch('/api/logout', {
-            method: 'POST',
-            credentials: 'include',
-        });
-        const data = await response.json();
-        navigate(data.readirectTo);
-    }
-
-    async function checkUser() {
-        const response = await fetch('/api/user', {
-            credentials: 'include',
-        });
-        const data = await response.json();
-        if (data.ok) setAuthenticated(true);
-    }
-
-    useEffect(() => {
-        checkUser();
-    }, []);
-
+export default function Header({ isAuthenticated, logoutUser }) {
     return (
         <header>
             {/* Logo Ilustrativa */}
@@ -36,7 +11,7 @@ export default function Header() {
                     <li>
                         <Link to='/'>Home</Link>
                     </li>
-                    {!authenticated ? (
+                    {!isAuthenticated ? (
                         <li>
                             <Link to='/auth'>Auth</Link>
                         </li>

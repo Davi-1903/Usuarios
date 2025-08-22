@@ -1,18 +1,22 @@
 from flask import Blueprint, jsonify
-from flask_login import logout_user, current_user
+from flask_login import logout_user, login_required, current_user
 
 
 home_api_bp = Blueprint('home', __name__, url_prefix='/api')
 
 
-@home_api_bp.route('/user')
+@home_api_bp.route('/session')
+@login_required
 def index():
-    if current_user.is_authenticated:
-        return jsonify({'ok': True, 'name': current_user.name}), 200
-    return jsonify({'ok': False, 'erro': 'Não há usuário logado'}), 401
+    return jsonify({
+        'is_authenticated': current_user.is_authenticated,
+        'name': current_user.name,
+        'email': current_user.email
+    }), 200
 
 
-@home_api_bp.route('/logout', methods=['POST'])
+@home_api_bp.route('/logout', methods=['GET'])
+@login_required
 def logout():
     logout_user()
-    return jsonify({'ok': True, 'redirectTo': '/'}), 200
+    return jsonify({'ok': True, 'redirectTo': '/auth'}), 200

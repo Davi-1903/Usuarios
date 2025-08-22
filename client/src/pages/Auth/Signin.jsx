@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
 
-export default function SignIn({ changeForm }) {
+export default function SignIn({ changeForm, setAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShow] = useState(false);
@@ -17,7 +17,10 @@ export default function SignIn({ changeForm }) {
             body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
-        if (data.ok) navigate(data.redirectTo);
+        if (data.ok) {
+            setAuthenticated(true);
+            navigate(data.redirectTo);
+        }
         else alert(data.message);
     }
 

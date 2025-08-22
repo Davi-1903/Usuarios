@@ -25,11 +25,11 @@ export default function Home() {
     const [name, setName] = useState(null);
 
     async function getName() {
-        const response = await fetch('/api/user', {
+        const response = await fetch('/api/session', {
             credentials: 'include',
         });
         const data = await response.json();
-        if (data.ok) setName(data.name);
+        if (data.is_authenticated) setName(data.name);
     }
 
     useEffect(() => {
