@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Welcome from './pages/Home/Welcome';
@@ -20,16 +20,17 @@ export default function App() {
         navigate(data.redirect);
     }
 
-    async function checkUser() {
-        const response = await fetch('/api/session', {
-            credentials: 'include',
-        });
-        setAuthenticated(response.status === 200);
-    }
+    const checkUser = useCallback(async () => {
+        const response = await fetch('/api/session', { credentials: 'include' });
+        if (response.status === 200) {
+            setAuthenticated(true);
+            navigate('/dash');
+        }
+    }, [navigate]);
 
     useEffect(() => {
         checkUser();
-    }, []);
+    }, [checkUser]);
 
     return (
         <div className='wrapper'>
