@@ -19,4 +19,4 @@ def index():
 @login_required
 def logout():
     logout_user()
-    return jsonify({'ok': True, 'redirectTo': '/auth'}), 200
+    return jsonify({'ok': True, 'redirect': '/auth'}), 200

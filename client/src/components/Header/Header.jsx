@@ -8,17 +8,24 @@ export default function Header({ isAuthenticated, logoutUser }) {
             <div className='logo'></div>
             <nav>
                 <ul className='menu'>
-                    <li>
-                        <Link to='/'>Home</Link>
-                    </li>
-                    {!isAuthenticated ? (
-                        <li>
-                            <Link to='/auth'>Auth</Link>
-                        </li>
+                    {isAuthenticated ? (
+                        <>
+                            <li>
+                                <Link to='/dash'>Dash</Link>
+                            </li>
+                            <li>
+                                <Link onClick={logoutUser}>Logout</Link>
+                            </li>
+                        </>
                     ) : (
-                        <li>
-                            <Link onClick={logoutUser}>Logout</Link>
-                        </li>
+                        <>
+                            <li>
+                                <Link to='/'>Home</Link>
+                            </li>
+                            <li>
+                                <Link to='/auth'>Auth</Link>
+                            </li>
+                        </>
                     )}
                 </ul>
             </nav>

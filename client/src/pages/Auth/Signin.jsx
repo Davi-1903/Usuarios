@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
 
 export default function SignIn({ changeForm, setAuthenticated }) {
@@ -10,7 +10,7 @@ export default function SignIn({ changeForm, setAuthenticated }) {
 
     async function submit(e) {
         e.preventDefault();
-        
+
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -19,9 +19,8 @@ export default function SignIn({ changeForm, setAuthenticated }) {
         const data = await response.json();
         if (data.ok) {
             setAuthenticated(true);
-            navigate(data.redirectTo);
-        }
-        else alert(data.message);
+            navigate(data.redirect);
+        } else alert(data.message);
     }
 
     function toSignup() {

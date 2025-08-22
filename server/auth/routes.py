@@ -17,7 +17,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return jsonify({'ok': True, 'redirectTo': '/'}), 200
+        return jsonify({'ok': True, 'redirect': '/dash'}), 200
     return jsonify({'ok': False, 'message': 'Este email já está cadastrado'}), 401
 
 
@@ -29,6 +29,6 @@ def login():
     if user:
         if check_password_hash(user.password, data.get('password')):
             login_user(user)
-            return jsonify({'ok': True, 'redirectTo': '/'}), 200
+            return jsonify({'ok': True, 'redirect': '/dash'}), 200
         return jsonify({'ok': False, 'message': 'A senha está incorreta'}), 401
     return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401

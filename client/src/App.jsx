@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Home from './pages/Home/Home';
+import Welcome from './pages/Home/Welcome';
+import Dash from './pages/Home/Dash';
 import Auth from './Pages/Auth/Auth';
 import Footer from './components/Footer/Footer';
 import './App.css';
@@ -16,7 +17,7 @@ export default function App() {
         });
         const data = await response.json();
         setAuthenticated(false);
-        navigate(data.readirectTo);
+        navigate(data.redirect);
     }
 
     async function checkUser() {
@@ -35,7 +36,8 @@ export default function App() {
             <Header isAuthenticated={isAuthenticated} logoutUser={logoutUser} />
             <main>
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<Welcome />} />
+                    <Route path='/dash' element={<Dash />} />
                     <Route path='/auth' element={<Auth setAuthenticated={setAuthenticated} />} />
                 </Routes>
             </main>

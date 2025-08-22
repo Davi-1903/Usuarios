@@ -20,9 +20,8 @@ export default function SignUp({ changeForm, setAuthenticated }) {
         const data = await response.json();
         if (data.ok) {
             setAuthenticated(true);
-            navigate(data.redirectTo);
-        }
-        else alert(data.message);
+            navigate(data.redirect);
+        } else alert(data.message);
     }
 
     function toSignin() {
