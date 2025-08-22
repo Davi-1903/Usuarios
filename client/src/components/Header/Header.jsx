@@ -7,7 +7,7 @@ export default function Header() {
     const navigate = useNavigate();
 
     async function logoutUser() {
-        const response = await fetch('/logout', {
+        const response = await fetch('/api/logout', {
             method: 'POST',
             credentials: 'include',
         });
@@ -16,7 +16,7 @@ export default function Header() {
     }
 
     async function checkUser() {
-        const response = await fetch('/user', {
+        const response = await fetch('/api/user', {
             credentials: 'include',
         });
         const data = await response.json();

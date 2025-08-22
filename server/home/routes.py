@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from flask_login import logout_user, current_user
 
 
-home_api_bp = Blueprint('home', __name__, url_prefix='/')
+home_api_bp = Blueprint('home', __name__, url_prefix='/api')
 
 
 @home_api_bp.route('/user')

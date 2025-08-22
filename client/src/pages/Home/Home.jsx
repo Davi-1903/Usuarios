@@ -16,7 +16,7 @@ function UserLogout() {
 function UserLogin({ name }) {
     return (
         <div className='text-container'>
-            <h1>Welcome back, {name}</h1>
+            <h1>Welcome, {name}</h1>
         </div>
     );
 }
@@ -24,8 +24,10 @@ function UserLogin({ name }) {
 export default function Home() {
     const [name, setName] = useState(null);
 
-    async function getNAme() {
-        const response = await fetch('/user');
+    async function getName() {
+        const response = await fetch('/api/user', {
+            credentials: 'include',
+        });
         const data = await response.json();
         if (!data.ok) {
             throw new Error('Erro HTTP');
@@ -34,7 +36,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        getNAme()
+        getName();
     }, []);
 
     return <>{name ? <UserLogin name={name} /> : <UserLogout />}</>;

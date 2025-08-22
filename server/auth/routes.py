@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash
 from database.model import db, User
 
 
-auth_api_bp = Blueprint('api', __name__, url_prefix='/auth')
+auth_api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 
 @auth_api_bp.route('/register', methods=['POST'])
