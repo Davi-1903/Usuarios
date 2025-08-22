@@ -1,0 +1,17 @@
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+    aspect-ratio: 1;
+    border: 20px solid var(--color1);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    from { transform: rotate(0) }
+    to { transform: rotate(360deg) }
+}

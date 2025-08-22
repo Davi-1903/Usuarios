@@ -7,7 +7,7 @@ home_api_bp = Blueprint('home', __name__, url_prefix='/api')
 
 @home_api_bp.route('/session')
 @login_required
-def index():
+def session():
     return jsonify({
         'is_authenticated': current_user.is_authenticated,
         'name': current_user.name,
