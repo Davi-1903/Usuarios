@@ -1,15 +1,21 @@
-# Flask-React
+# Flask + React
 
-Aplicação extremamente simples (mal feita kkkk) para aprendar a integrar `Flask` com `React`.
+Aplicação de login extremamente simples para aprendar a integrar `Flask` com `React`.
 
 ## Como executar
 
-Para executar essa brincadeira é pouco complicado, mas vamos lá. Primeiro, é preciso ter o `Python` e o `NodeJS` instalados.
+Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, é preciso ter o `Python` e o `NodeJS` instalados.
 
 > [!NOTE]
 > O projeto, por mais que use `React`, usa um único servidor, o do `Flask`.
 
-1. **Instale todas as dependências**
+1. **Clone o repositório**
+
+    ```git
+    git clone https://github.com/Davi-1903/Flask-React.git
+    ```
+
+2. **Instale todas as dependências**
 
     - **`/client`**
 
@@ -20,21 +26,22 @@ Para executar essa brincadeira é pouco complicado, mas vamos lá. Primeiro, é 
     - **`/server`**
 
         ```powershell
-        python -m venv .venv # Ambiente virtual
-        .\.venv\Scripts\activate
         pip install -r requirements.txt
         ```
 
-2. **Dentro de `client/` é preciso gerar o `build`**
+3. **Dentro de `client/` é preciso gerar o `build`**
 
     ```powershell
     npm run build
     ```
 
-3. **Dentro de `server/`, execute**
+4. **Dentro de `server/`, execute**
 
     ```powershell
     python app.py
     ```
+
+> [!TIP]
+> Use ambiente virtual 😉
 
 Se tudo ocorrer bem, a aplicação está rodando em [`http://localhost:5000`](http://localhost:5000)
