@@ -23,6 +23,12 @@ function SignIn({ changeForm }) {
         navigate(data.redirectTo);
     }
 
+    function toSignup() {
+        setEmail('');
+        setPassword('');
+        changeForm();
+    }
+
     return (
         <form className='signin' onSubmit={submit}>
             <h2>SignIn</h2>
@@ -60,7 +66,7 @@ function SignIn({ changeForm }) {
             </div>
             <button type='submit'>SignIn</button>
             <p>
-                Don't have an account? <a onClick={changeForm}>To SignUp</a>
+                Don't have an account? <a onClick={toSignup}>To SignUp</a>
             </p>
         </form>
     );
@@ -86,6 +92,13 @@ function SignUp({ changeForm }) {
             throw new Error('Erro HTTP');
         }
         navigate(data.redirectTo);
+    }
+
+    function toSignin() {
+        setName('');
+        setEmail('');
+        setPassword('');
+        changeForm();
     }
 
     return (
@@ -141,7 +154,7 @@ function SignUp({ changeForm }) {
             </div>
             <button type='submit'>SignUp</button>
             <p>
-                Already have an account? <a onClick={changeForm}>To SignIn</a>
+                Already have an account? <a onClick={toSignin}>To SignIn</a>
             </p>
         </form>
     );
