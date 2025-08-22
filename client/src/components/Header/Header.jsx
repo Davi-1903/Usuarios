@@ -20,10 +20,7 @@ export default function Header() {
             credentials: 'include',
         });
         const data = await response.json();
-        if (!data.ok) {
-            throw new Error('Erro HTTP');
-        }
-        setAuthenticated(true);
+        if (data.ok) setAuthenticated(true);
     }
 
     useEffect(() => {

@@ -29,10 +29,7 @@ export default function Home() {
             credentials: 'include',
         });
         const data = await response.json();
-        if (!data.ok) {
-            throw new Error('Erro HTTP');
-        }
-        setName(data.name);
+        if (data.ok) setName(data.name);
     }
 
     useEffect(() => {

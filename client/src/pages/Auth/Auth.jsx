@@ -17,10 +17,8 @@ function SignIn({ changeForm }) {
             body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
-        if (!data.ok) {
-            throw new Error('Erro HTTP');
-        }
-        navigate(data.redirectTo);
+        if (data.ok) navigate(data.redirectTo);
+        else alert(data.message);
     }
 
     function toSignup() {
@@ -52,7 +50,7 @@ function SignIn({ changeForm }) {
                 <label htmlFor='password'>Password</label>
                 <div className='input-content'>
                     <input
-                        type={showPassword ? 'text' : 'password'}
+                        type='password'
                         id='password'
                         placeholder='Your secret password'
                         required
@@ -88,10 +86,8 @@ function SignUp({ changeForm }) {
             body: JSON.stringify({ name, email, password }),
         });
         const data = await response.json();
-        if (!data.ok) {
-            throw new Error('Erro HTTP');
-        }
-        navigate(data.redirectTo);
+        if (data.ok) navigate(data.redirectTo);
+        else alert(data.message);
     }
 
     function toSignin() {

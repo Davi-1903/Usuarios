@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_user
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from database.model import db, User
 
 
@@ -18,7 +18,7 @@ def register():
         db.session.commit()
         login_user(new_user)
         return jsonify({'ok': True, 'redirectTo': '/'}), 200
-    return jsonify({'ok': False, 'erro': 'Este email já está cadastrado'}), 401
+    return jsonify({'ok': False, 'message': 'Este email já está cadastrado'}), 401
 
 
 @auth_api_bp.route('/login', methods=['POST'])
@@ -27,6 +27,8 @@ def login():
     user = User.query.filter_by(email=data.get('email')).first()
 
     if user:
-        login_user(user)
-        return jsonify({'ok': True, 'redirectTo': '/'}), 200
-    return jsonify({'ok': False, 'erro': 'Este email não está cadastrado no sistema'}), 401
+        if check_password_hash(user.password, data.get('password')):
+            login_user(user)
+            return jsonify({'ok': True, 'redirectTo': '/'}), 200
+        return jsonify({'ok': False, 'message': 'A senha está incorreta'}), 401
+    return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
