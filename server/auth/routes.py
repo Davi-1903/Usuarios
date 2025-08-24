@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_user
+from flask_login import login_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database.model import db, User
 
@@ -32,3 +32,10 @@ def login():
             return jsonify({'ok': True, 'redirect': '/dash'}), 200
         return jsonify({'ok': False, 'message': 'A senha está incorreta'}), 401
     return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
+
+
+@auth_api_bp.route('/check_auth', methods=['GET'])
+def check_auth():
+    if current_user.is_authenticated:
+        return {'ok': True}, 200
+    return {'ok': False}, 401

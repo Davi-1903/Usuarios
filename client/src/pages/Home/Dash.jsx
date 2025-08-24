@@ -5,7 +5,7 @@ export default function Dash() {
     const [name, setName] = useState(null);
 
     useEffect(() => {
-        fetch('/api/session', { credentials: 'include' })
+        fetch('/api/user', { credentials: 'include' })
             .then(res => res.json())
             .then(data => setName(data.name));
     }, []);

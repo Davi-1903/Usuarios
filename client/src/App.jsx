@@ -23,10 +23,10 @@ export default function App() {
     }
 
     const checkUser = useCallback(async () => {
-        const response = await fetch('/api/session', { credentials: 'include' });
+        const response = await fetch('/api/check_auth', { credentials: 'include' });
         if (response.status === 200) {
             setAuthenticated(true);
-            navigate('/dash');
+            navigate('/dash')
         }
     }, [navigate]);
 

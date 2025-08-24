@@ -1,16 +1,16 @@
 from flask import Flask, send_from_directory
-from home.routes import home_api_bp
+from user.routes import user_api_bp
 from auth.routes import auth_api_bp
 import os, config
 
 
-app = Flask(__name__, static_folder='../client/dist', static_url_path='/', instance_relative_config=True)
-app.register_blueprint(home_api_bp)
+app = Flask(__name__, static_folder='../client/dist', instance_relative_config=True)
+app.register_blueprint(user_api_bp)
 app.register_blueprint(auth_api_bp)
 config.config_app(app)
 
 
-# Rota para o React Router
+# Rota "Catch-All"
 @app.route('/')
 @app.route('/<path:path>')
 def serve_react(path=''):
