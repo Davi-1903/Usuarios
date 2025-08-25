@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
 
 export default function SignIn({ changeForm, setAuthenticated }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({
+        email: '',
+        password: '',
+    });
     const [showPassword, setShow] = useState(false);
     const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ export default function SignIn({ changeForm, setAuthenticated }) {
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify(form),
         });
         const data = await response.json();
         if (data.ok) {
@@ -24,8 +26,7 @@ export default function SignIn({ changeForm, setAuthenticated }) {
     }
 
     function toSignup() {
-        setEmail('');
-        setPassword('');
+        setForm({ email: '', password: '' });
         changeForm();
     }
 
@@ -40,8 +41,8 @@ export default function SignIn({ changeForm, setAuthenticated }) {
                         id='email'
                         placeholder='exemplo@email.com'
                         required
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        value={form.email}
+                        onChange={e => setForm({ ...form, email: e.target.value })}
                     />
                     <label htmlFor='email'>
                         <IconMail />
@@ -56,8 +57,8 @@ export default function SignIn({ changeForm, setAuthenticated }) {
                         id='password'
                         placeholder='Your secret password'
                         required
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={form.password}
+                        onChange={e => setForm({ ...form, password: e.target.value })}
                     />
                     <label htmlFor='show-signin'>
                         <IconEyeOff id='show-signin' onClick={() => setShow(!showPassword)} />

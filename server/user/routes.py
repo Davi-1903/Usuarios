@@ -5,8 +5,8 @@ from flask_login import logout_user, login_required, current_user
 user_api_bp = Blueprint('user', __name__, url_prefix='/api')
 
 
-@login_required
 @user_api_bp.route('/user', methods=['GET'])
+@login_required
 def get_user():
     if current_user.is_authenticated:
         return jsonify({
@@ -16,8 +16,8 @@ def get_user():
     return jsonify({'message': 'Não há usuário logado no momento'}), 401
 
 
-@login_required
 @user_api_bp.route('/logout', methods=['GET'])
+@login_required
 def logout():
     logout_user()
     return jsonify({'ok': True, 'redirect': '/auth'}), 200

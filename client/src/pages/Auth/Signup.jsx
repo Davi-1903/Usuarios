@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { IconUser, IconMail, IconEyeOff } from '@tabler/icons-react';
 
 export default function SignUp({ changeForm, setAuthenticated }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        password: '',
+    });
     const [showPassword, setShow] = useState(false);
     const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ export default function SignUp({ changeForm, setAuthenticated }) {
         const response = await fetch('/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify(form),
         });
         const data = await response.json();
         if (data.ok) {
@@ -25,9 +27,11 @@ export default function SignUp({ changeForm, setAuthenticated }) {
     }
 
     function toSignin() {
-        setName('');
-        setEmail('');
-        setPassword('');
+        setForm({
+            name: '',
+            email: '',
+            password: '',
+        });
         changeForm();
     }
 
@@ -42,8 +46,8 @@ export default function SignUp({ changeForm, setAuthenticated }) {
                         id='name'
                         placeholder="What's your name?"
                         required
-                        value={name}
-                        onChange={e => setName(e.target.value)}
+                        value={form.name}
+                        onChange={e => setForm({ ...form, name: e.target.value })}
                     />
                     <label htmlFor='name'>
                         <IconUser />
@@ -58,8 +62,8 @@ export default function SignUp({ changeForm, setAuthenticated }) {
                         id='email'
                         placeholder='exemplo@email.com'
                         required
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        value={form.email}
+                        onChange={e => setForm({ ...form, email: e.target.value })}
                     />
                     <label htmlFor='email'>
                         <IconMail />
@@ -74,8 +78,8 @@ export default function SignUp({ changeForm, setAuthenticated }) {
                         id='password'
                         placeholder='Your secret password'
                         required
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={form.password}
+                        onChange={e => setForm({ ...form, password: e.target.value })}
                     />
                     <label htmlFor='show-singup'>
                         <IconEyeOff id='show-singup' onClick={() => setShow(!showPassword)} />
