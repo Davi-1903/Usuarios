@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_user, current_user
+from flask_login import login_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from database.model import db, User
 
@@ -35,7 +35,6 @@ def login():
 
 
 @auth_api_bp.route('/check_auth', methods=['GET'])
+@login_required
 def check_auth():
-    if current_user.is_authenticated:
-        return {'ok': True}, 200
-    return {'ok': False}, 401
+    return {'ok': True}, 200

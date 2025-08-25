@@ -26,7 +26,7 @@ export default function App() {
         const response = await fetch('/api/check_auth', { credentials: 'include' });
         if (response.status === 200) {
             setAuthenticated(true);
-            navigate('/dash')
+            navigate('/dash');
         }
     }, [navigate]);
 
