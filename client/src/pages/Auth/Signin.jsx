@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
+import { useAuthenticated } from '../../context/AuthContext';
 
-export default function SignIn({ changeForm, setAuthenticated }) {
+export default function SignIn({ changeForm }) {
     const [form, setForm] = useState({
         email: '',
         password: '',
     });
     const [showPassword, setShow] = useState(false);
+    const { setAuthenticated } = useAuthenticated();
     const navigate = useNavigate();
 
     async function submit(e) {

@@ -1,7 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthenticated } from '../../context/AuthContext';
 import './Header.css';
 
-export default function Header({ isAuthenticated, logoutUser }) {
+export default function Header() {
+    const { isAuthenticated, setAuthenticated } = useAuthenticated();
+    const navigate = useNavigate();
+
+    async function logoutUser() {
+        if (confirm('Você tem certeza?')) {
+            const response = await fetch('/api/logout', {
+                credentials: 'include',
+            });
+            const data = await response.json();
+            setAuthenticated(false);
+            navigate(data.redirect);
+        }
+    }
+
     return (
         <header>
             {/* Logo Ilustrativa */}
