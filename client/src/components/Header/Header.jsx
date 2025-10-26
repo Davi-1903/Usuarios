@@ -8,7 +8,7 @@ export default function Header() {
 
     async function logoutUser() {
         if (confirm('Você tem certeza?')) {
-            const response = await fetch('/api/logout', {
+            const response = await fetch('/api/auth/logout', {
                 credentials: 'include',
             });
             const data = await response.json();

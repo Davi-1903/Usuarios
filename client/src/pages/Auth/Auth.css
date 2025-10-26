@@ -22,8 +22,8 @@
     width: 100%;
     height: fit-content;
     padding: 2rem;
-    background-color: var(--color3);
-    box-shadow: .25rem .5rem 1rem var(--shadow-color);
+    background-color: hsl(from var(--base-color) h s calc(l + 10));
+    box-shadow: 0 0 1rem hsl(from var(--text-color) h s l / 0.1);
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -40,13 +40,13 @@
 
 form>h2 {
     font: bold 3rem var(--font1);
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 form .input-label>label {
     display: block;
     font: normal 1.2rem var(--font2);
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 form .input-label>.input-content {
@@ -57,10 +57,10 @@ form .input-label input {
     width: 100%;
     outline: none;
     aspect-ratio: 20 / 3;
-    background-color: var(--background);
+    background-color: hsl(from var(--base-color) h s l);
     padding-inline: 1rem 15%;
     font: normal 1rem var(--font2);
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 form .input-label>.input-content label {
@@ -75,31 +75,31 @@ form .input-label>.input-content label {
 }
 
 form .input-label>.input-content label:hover {
-    background-color: var(--color4);
+    background-color: hsl(from var(--base-color) h s calc(l - 10));
 }
 
 form .input-label>.input-content label svg {
     width: 32px;
     height: 32px;
-    stroke: var(--color1);
+    stroke: hsl(from var(--text-color) h s l);
 }
 
 form>button[type='submit'] {
     width: 100%;
     aspect-ratio: 20 / 3;
-    background-color: var(--color1);
+    background-color: hsl(from var(--text-color) h s l);
     font: normal 1.2rem var(--font1);
-    color: var(--background);
+    color: hsl(from var(--base-color) h s l);
 }
 
 form>p {
     font: normal 1rem var(--font2);
-    color: var(--color2);
+    color: hsl(from var(--text-color) h s l);
 }
 
 form>p>a {
     cursor: pointer;
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 form>p>a:hover {

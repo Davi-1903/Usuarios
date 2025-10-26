@@ -6,7 +6,7 @@ export default function PrivateRoute({ children }) {
     const [isAuthenticated, setAuthenticated] = useState(null);
 
     useEffect(() => {
-        fetch('/api/check_auth', { credentials: 'include' }).then(res =>
+        fetch('/api/auth/check', { credentials: 'include' }).then(res =>
             setAuthenticated(res.status === 200)
         );
     }, []);

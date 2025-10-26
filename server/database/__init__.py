@@ -1,10 +1,16 @@
-from database.model import db
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 
+db = SQLAlchemy()
+
+
 def init_database(app):
-    os.makedirs(app.instance_path, exist_ok=True)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{app.instance_path}/data.db'
+    DATABASE_URI = os.environ.get('DATABASE_URI')
+    if DATABASE_URI is None:
+        raise RuntimeError('DATABASE_URI não foi definida')
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 

@@ -5,7 +5,7 @@
     transform: translate(-50%, -50%);
     height: 100px;
     aspect-ratio: 1;
-    border: 20px solid var(--color1);
+    border: 20px solid hsl(from var(--text-color) h s l);
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: loading 1s linear infinite;

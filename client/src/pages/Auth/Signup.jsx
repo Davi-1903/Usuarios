@@ -16,7 +16,7 @@ export default function SignUp({ changeForm }) {
     async function submit(e) {
         e.preventDefault();
 
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form),

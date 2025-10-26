@@ -1,19 +1,19 @@
 header {
-    background-color: var(--color3);
+    background-color: hsl(from var(--base-color) h s calc(l + 10));
     height: 100px;
     display: flex;
     padding-inline: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 .5rem 1rem var(--shadow-color);
+    box-shadow: 0 .5rem 1rem hsl(from var(--text-color) h s l / 0.1);
 }
 
 header .logo {
     height: 60%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: var(--color1);
+    background-color: hsl(from var(--text-color) h s l);
 }
 
 header>nav .menu {
@@ -25,7 +25,7 @@ header>nav .menu {
 header>nav .menu a {
     font: normal 1.2rem var(--font1);
     text-decoration: none;
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 header>nav .menu a:hover {

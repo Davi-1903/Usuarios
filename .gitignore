@@ -17,16 +17,19 @@ env/
 .env/
 venv/
 .venv/
+ENV/
 
 # Arquivos binários
 __pycache__/
+*.pyc
 
-# Banco de dados
-instance/*.db
+# Variáveis de ambiente
+.env
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 .DS_Store
 *.suo

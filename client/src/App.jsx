@@ -5,6 +5,7 @@ import Welcome from './pages/Home/Welcome';
 import Dash from './pages/Home/Dash';
 import Auth from './Pages/Auth/Auth';
 import Footer from './components/Footer/Footer';
+import Error404 from './pages/Errors/Error404';
 import { useAuthenticated } from './context/AuthContext';
 import './App.css';
 
@@ -13,7 +14,7 @@ export default function App() {
     const navigate = useNavigate();
 
     const checkUser = useCallback(async () => {
-        const response = await fetch('/api/check_auth', { credentials: 'include' });
+        const response = await fetch('/api/auth/check', { credentials: 'include' });
         if (response.status === 200) {
             setAuthenticated(true);
             navigate('/dash');
@@ -29,9 +30,10 @@ export default function App() {
             <Header />
             <main>
                 <Routes>
-                    <Route path='/' element={<Welcome />} />
+                    <Route index element={<Welcome />} />
                     <Route path='/dash' element={<Dash />} />
                     <Route path='/auth' element={<Auth />} />
+                    <Route path='*' element={<Error404 />} />
                 </Routes>
             </main>
             <Footer />

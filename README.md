@@ -1,6 +1,6 @@
-# Flask + React
+# Usuários
 
-Aplicação de login extremamente simples para aprendar a integrar `Flask` com `React Router`.
+Aplicação de login extremamente simples para aprendar a integrar `Flask`, `React` e `MySQL`.
 
 ## Como executar
 
@@ -12,18 +12,18 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
 1. **Clone o repositório**
 
     ```git
-    git clone https://github.com/Davi-1903/Flask-React.git
+    git clone https://github.com/Davi-1903/Usuarios.git
     ```
 
 2. **Instale todas as dependências**
 
-    - **`/client`**
+    - **`client/`**
 
         ```powershell
         npm install
         ```
 
-    - **`/server`**
+    - **`server/`**
 
         ```powershell
         pip install -r requirements.txt
@@ -35,7 +35,14 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
     npm run build
     ```
 
-4. **Dentro de `server/`, execute**
+4. **Crie um arquivo `.env` na raiz do projeto e adicione**
+
+    ```env
+    SECRET_KEY='<CHAVE SECRETA>'
+    DATABASE_URI='mysql+pymysql://root:<SENHA?>@localhost:<PORTA>/db_users'
+    ```
+
+5. **Dentro de `server/`, execute**
 
     ```powershell
     python app.py

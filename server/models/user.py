@@ -1,8 +1,5 @@
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
-
-
-db = SQLAlchemy()
+from database import db
 
 
 class User(UserMixin, db.Model):
@@ -11,8 +8,8 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(150), nullable=False)
 
     @classmethod
-    def get(cls, user_id):
+    def get(cls, user_id: int) -> 'User | None':
         return db.session.get(cls, user_id)

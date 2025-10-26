@@ -10,12 +10,8 @@
 }
 
 :root {
-    --background: #EEF;
-    --color1: #303040;
-    --color2: #606080;
-    --color3: #FFF;
-    --color4: #CCD;
+    --base-color: #EEF;
+    --text-color: #303040;
     --font1: 'Chivo Mono';
     --font2: 'Roboto';
-    --shadow-color: #30304020
 }

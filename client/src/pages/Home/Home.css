@@ -9,13 +9,13 @@
 
 .text-container > h1 {
     font: bold 4rem var(--font1);
-    color: var(--color1);
+    color: hsl(from var(--text-color) h s l);
 }
 
 .text-container button {
     padding: .5rem 2rem;
-    background-color: var(--color1);
+    background-color: hsl(from var(--text-color) h s l);
     font: normal 1.6rem var(--font2);
     text-decoration: none;
-    color: var(--color3);
+    color: hsl(from var(--base-color) h s l);
 }

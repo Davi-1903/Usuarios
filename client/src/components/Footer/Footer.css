@@ -1,6 +1,6 @@
 footer {
     padding: .5rem;
-    background-color: var(--color1);
+    background-color: hsl(from var(--text-color) h s l);
 }
 
 footer>p {
