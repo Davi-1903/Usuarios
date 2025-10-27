@@ -17,7 +17,7 @@ def register():
         if data is None:
             return jsonify({'ok': False, 'message': 'Os dados não foram recebidos'}), 401
 
-        user = User.query.filter_by(email=['email']).first()
+        user = User.query.filter_by(email=data['email']).first()
         if user:
             return jsonify({'ok': False, 'message': 'Este email já está cadastrado'}), 401
         

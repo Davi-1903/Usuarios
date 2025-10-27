@@ -1,12 +1,8 @@
 import { useEffect, useCallback } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Welcome from './pages/Home/Welcome';
-import Dash from './pages/Home/Dash';
-import Auth from './Pages/Auth/Auth';
-import Footer from './components/Footer/Footer';
-import Error404 from './pages/Errors/Error404';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useAuthenticated } from './context/AuthContext';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 export default function App() {
@@ -29,12 +25,7 @@ export default function App() {
         <div className='wrapper'>
             <Header />
             <main>
-                <Routes>
-                    <Route index element={<Welcome />} />
-                    <Route path='/dash' element={<Dash />} />
-                    <Route path='/auth' element={<Auth />} />
-                    <Route path='*' element={<Error404 />} />
-                </Routes>
+                <Outlet />
             </main>
             <Footer />
         </div>

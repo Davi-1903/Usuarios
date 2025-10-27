@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import Loading from '../Loading/Loading';
+import { useAuthenticated } from '../../context/AuthContext';
 
 export default function PrivateRoute({ children }) {
-    const [isAuthenticated, setAuthenticated] = useState(null);
-
-    useEffect(() => {
-        fetch('/api/auth/check', { credentials: 'include' }).then(res =>
-            setAuthenticated(res.status === 200)
-        );
-    }, []);
-
-    if (isAuthenticated === null) return <Loading />;
+    const { isAuthenticated } = useAuthenticated();
+    
     if (!isAuthenticated) return <Navigate to='/auth' />;
     return children;
 }
