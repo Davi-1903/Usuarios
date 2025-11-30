@@ -1,6 +1,6 @@
 # Usuários
 
-Aplicação de login extremamente simples para aprendar a integrar `Flask`, `React` e `MySQL`.
+Aplicação de login extremamente simples para aprendar a integrar `Flask`, `Tailwind`, `React` e `MySQL`.
 
 ## Como executar
 
