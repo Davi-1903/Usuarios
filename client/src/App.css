@@ -1,8 +1,0 @@
-.wrapper {
-    min-height: 100vh;
-    background-color: var(--base-color);
-}
-
-main {
-    min-height: calc(100vh - 100px);
-}

@@ -1,21 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthenticated } from '../../context/AuthContext';
-import './Header.css';
 
 export default function Header() {
     const { isAuthenticated, setAuthenticated } = useAuthenticated();
     const navigate = useNavigate();
 
     async function logoutUser(e) {
-        e.preventDefault()
+        e.preventDefault();
 
         const confirmed = confirm('Você tem certeza?');
         if (!confirmed) return;
-        
+
         const response = await fetch('/api/auth/logout', {
             credentials: 'include',
         });
-        
+
         const data = await response.json();
         if (data.ok) {
             setAuthenticated(false);
@@ -24,26 +23,26 @@ export default function Header() {
     }
 
     return (
-        <header>
+        <header className='bg-header shadow-basic flex items-center justify-between px-8'>
             {/* Logo Ilustrativa */}
-            <div className='logo'></div>
+            <div className='aspect-square h-[60%] rounded-full bg-black'></div>
             <nav>
-                <ul className='menu'>
+                <ul className='flex gap-8'>
                     {isAuthenticated ? (
                         <>
-                            <li>
+                            <li className='link'>
                                 <Link to='/dash'>Dash</Link>
                             </li>
-                            <li>
+                            <li className='link'>
                                 <Link onClick={logoutUser}>Logout</Link>
                             </li>
                         </>
                     ) : (
                         <>
-                            <li>
+                            <li className='link'>
                                 <Link to='/'>Home</Link>
                             </li>
-                            <li>
+                            <li className='link'>
                                 <Link to='/auth'>Auth</Link>
                             </li>
                         </>

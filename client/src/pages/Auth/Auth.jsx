@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SignIn from './Signin';
 import SignUp from './Signup';
-import './Auth.css';
 
 export default function Auth() {
     const [invert, setInvert] = useState(false);
@@ -11,11 +10,13 @@ export default function Auth() {
     }
 
     return (
-        <div className='form-content'>
-            <div className={`form-container ${invert ? 'invert' : ''}`}>
+        <main className='grid place-items-center perspective-distant'>
+            <div
+                className={`relative h-full w-sm transition duration-500 ease-in-out transform-3d ${invert ? 'rotate-y-180' : ''}`}
+            >
                 <SignUp changeForm={changeForm} />
                 <SignIn changeForm={changeForm} />
             </div>
-        </div>
+        </main>
     );
 }

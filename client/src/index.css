@@ -1,17 +1,62 @@
-@charset "UTF-8";
-
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
+@import 'tailwindcss';
 
 :root {
+    --height-header: 100px;
     --base-color: #EEF;
     --text-color: #303040;
-    --font1: 'Chivo Mono';
-    --font2: 'Roboto';
+    --font-primary: 'Chivo Mono';
+    --font-secundary: 'Roboto';
+}
+
+@layer base {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template: var(--height-header) calc(100vh - var(--height-header)) auto / 1fr;
+        background-color: var(--base-color);
+    }
+}
+
+@theme inline {
+    --height-header: var(--height-header);
+    --color-white: var(--base-color);
+    --color-black: var(--text-color);
+    --color-header: hsl(from var(--base-color) h s calc(l + 10));
+    --shadow-basic: 0 .5rem 1rem hsl(from var(--text-color) h s l / 0.1);
+    --font-primary: var(--font-primary);
+    --font-secundary: var(--font-secundary);
+}
+
+@layer components {
+    .link {
+        font: normal 1.2rem var(--font-primary);
+        text-decoration: none;
+        color: hsl(from var(--text-color) h s l);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .form {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: fit-content;
+        padding: 2rem;
+        background-color: hsl(from var(--base-color) h s calc(l + 10));
+        box-shadow: 0 0 1rem hsl(from var(--text-color) h s l / 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        backface-visibility: hidden;
+    }
 }

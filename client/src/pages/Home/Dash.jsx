@@ -12,9 +12,9 @@ export default function Dash() {
 
     return (
         <PrivateRoute>
-            <div className='text-container'>
-                <h1>Welcome, {name}</h1>
-            </div>
+            <main className='grid place-items-center'>
+                <h1 className='font-primary text-7xl font-bold text-black'>Welcome, {name}</h1>
+            </main>
         </PrivateRoute>
     );
 }

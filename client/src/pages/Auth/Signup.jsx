@@ -38,27 +38,35 @@ export default function SignUp({ changeForm }) {
     }
 
     return (
-        <form className='signup' onSubmit={submit}>
-            <h2>SignUp</h2>
-            <div className='input-label'>
-                <label htmlFor='name'>Name</label>
-                <div className='input-content'>
+        <form className='form -translate-y-1/2 rotate-y-180' onSubmit={submit}>
+            <h2 className='font-primary text-5xl font-bold text-black'>SignIn</h2>
+            <div>
+                <label htmlFor='name' className='font-secundary block text-lg text-black'>
+                    Name
+                </label>
+                <div className='relative'>
                     <input
                         type='text'
                         id='name'
-                        placeholder="What's your name?"
+                        placeholder='exemplo@email.com'
                         required
                         value={form.name}
                         onChange={e => setForm({ ...form, name: e.target.value })}
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
                     />
-                    <label htmlFor='name'>
-                        <IconUser />
+                    <label
+                        htmlFor='name'
+                        className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
+                    >
+                        <IconUser className='h-8 w-8 stroke-black' />
                     </label>
                 </div>
             </div>
-            <div className='input-label'>
-                <label htmlFor='email'>Email</label>
-                <div className='input-content'>
+            <div>
+                <label htmlFor='email' className='font-secundary block text-lg text-black'>
+                    Email
+                </label>
+                <div className='relative'>
                     <input
                         type='email'
                         id='email'
@@ -66,15 +74,21 @@ export default function SignUp({ changeForm }) {
                         required
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
                     />
-                    <label htmlFor='email'>
-                        <IconMail />
+                    <label
+                        htmlFor='email'
+                        className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
+                    >
+                        <IconMail className='h-8 w-8 stroke-black' />
                     </label>
                 </div>
             </div>
-            <div className='input-label'>
-                <label htmlFor='password'>Password</label>
-                <div className='input-content'>
+            <div>
+                <label htmlFor='password' className='font-secundary block text-lg text-black'>
+                    Password
+                </label>
+                <div className='relative'>
                     <input
                         type={showPassword ? 'text' : 'password'}
                         id='password'
@@ -82,15 +96,28 @@ export default function SignUp({ changeForm }) {
                         required
                         value={form.password}
                         onChange={e => setForm({ ...form, password: e.target.value })}
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
                     />
-                    <label htmlFor='show-singup'>
-                        <IconEyeOff id='show-singup' onClick={() => setShow(!showPassword)} />
+                    <label
+                        htmlFor='show-signin'
+                        className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
+                    >
+                        <IconEyeOff
+                            id='show-signin'
+                            onClick={() => setShow(!showPassword)}
+                            className='h-8 w-8 stroke-black'
+                        />
                     </label>
                 </div>
             </div>
-            <button type='submit'>SignUp</button>
-            <p>
-                Already have an account? <a onClick={toSignin}>To SignIn</a>
+            <button type='submit' className='font-primary h-12 w-full bg-black text-xl text-white'>
+                SignIn
+            </button>
+            <p className='text-2sm font-secundary text-black'>
+                Don't have an account?{' '}
+                <span onClick={toSignin} className='cursor-pointer text-black hover:underline'>
+                    To SignUp
+                </span>
             </p>
         </form>
     );

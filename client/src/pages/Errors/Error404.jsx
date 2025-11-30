@@ -1,7 +1,7 @@
 export default function Error404() {
     return (
-        <div className='text-container'>
-            <h1>Not Found :&#40;</h1>
-        </div>
+        <main className='grid place-items-center'>
+            <h1 className='font-primary text-7xl font-bold text-black'>Not Found :&#40;</h1>
+        </main>
     );
 }
