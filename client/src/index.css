@@ -28,6 +28,8 @@
     --height-header: var(--height-header);
     --color-white: var(--base-color);
     --color-black: var(--text-color);
+    --color-green: hsl(120 25% 50%);
+    --color-red: hsl(0 50% 50%);
     --color-header: hsl(from var(--base-color) h s calc(l + 10));
     --shadow-basic: 0 .5rem 1rem hsl(from var(--text-color) h s l / 0.1);
     --font-primary: var(--font-primary);
@@ -58,5 +60,47 @@
         flex-direction: column;
         gap: 2rem;
         backface-visibility: hidden;
+    }
+}
+
+@utility animate-progress {
+    animation: animation-progress 10s linear forwards;
+}
+
+@utility animate-new-message {
+    animation: new-message 1s forwards;
+}
+
+@utility animate-delete-message {
+    animation: delete-message 1s forwards;
+}
+
+@keyframes animation-progress {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes new-message {
+    from {
+        transform: translateX(calc(100% + 2rem));
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes delete-message {
+    from {
+        transform: none;
+    }
+
+    to {
+        transform: translateX(calc(100% + 2rem));
     }
 }

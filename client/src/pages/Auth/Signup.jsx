@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconUser, IconMail, IconEyeOff } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/AuthContext';
+import { useMessages } from '../../context/MessagesContext';
 
 export default function SignUp({ changeForm }) {
     const [form, setForm] = useState({
@@ -11,6 +12,7 @@ export default function SignUp({ changeForm }) {
     });
     const [showPassword, setShow] = useState(false);
     const { setAuthenticated } = useAuthenticated();
+    const { setMessages } = useMessages();
     const navigate = useNavigate();
 
     async function submit(e) {
@@ -25,7 +27,12 @@ export default function SignUp({ changeForm }) {
         if (data.ok) {
             setAuthenticated(true);
             navigate(data.redirect);
-        } else alert(data.message);
+        } else {
+            setMessages(prev => [
+                ...prev,
+                { id: prev.length + 1, title: 'Error', ok: false, description: data.message },
+            ]);
+        }
     }
 
     function toSignin() {
