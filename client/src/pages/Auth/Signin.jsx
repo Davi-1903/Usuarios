@@ -27,8 +27,11 @@ export default function SignIn({ changeForm }) {
             setAuthenticated(true);
             navigate(data.redirect);
         } else {
-            setMessages(prev => [...prev, {id: prev.length + 1, title: 'Error', ok: false, description: data.message}])
-        };
+            setMessages(prev => [
+                ...prev,
+                { id: prev.length + 1, title: 'Error', ok: false, description: data.message },
+            ]);
+        }
     }
 
     function toSignup() {
@@ -62,7 +65,10 @@ export default function SignIn({ changeForm }) {
                 </div>
             </div>
             <div>
-                <label htmlFor='password-signin' className='font-secundary block text-lg text-black'>
+                <label
+                    htmlFor='password-signin'
+                    className='font-secundary block text-lg text-black'
+                >
                     Password
                 </label>
                 <div className='relative'>
@@ -87,7 +93,10 @@ export default function SignIn({ changeForm }) {
                     </label>
                 </div>
             </div>
-            <button type='submit' className='font-primary h-12 w-full bg-black text-xl text-white'>
+            <button
+                type='submit'
+                className='font-primary h-12 w-full cursor-pointer bg-black text-xl text-white'
+            >
                 SignIn
             </button>
             <p className='text-2sm font-secundary text-black'>

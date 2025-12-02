@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import WrapperProvider from './context/WrappeProvider.jsx';
@@ -17,17 +16,15 @@ const router = createBrowserRouter([
         element: <App />,
         children: [
             { index: true, element: <Welcome /> },
-            { path: '/dash', element: <Dash /> },
-            { path: '/auth', element: <Auth /> },
+            { path: 'dash', element: <Dash /> },
+            { path: 'auth', element: <Auth /> },
             { path: '*', element: <Error404 /> },
         ],
     },
 ]);
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <WrapperProvider>
-            <RouterProvider router={router} />
-        </WrapperProvider>
-    </StrictMode>,
+    <WrapperProvider>
+        <RouterProvider router={router} />
+    </WrapperProvider>,
 );

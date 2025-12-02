@@ -117,7 +117,10 @@ export default function SignUp({ changeForm }) {
                     </label>
                 </div>
             </div>
-            <button type='submit' className='font-primary h-12 w-full bg-black text-xl text-white'>
+            <button
+                type='submit'
+                className='font-primary h-12 w-full cursor-pointer bg-black text-xl text-white'
+            >
                 SignIn
             </button>
             <p className='text-2sm font-secundary text-black'>
