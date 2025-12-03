@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { IconDashboard, IconHome, IconLogin, IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/AuthContext';
 
 export default function Header() {
@@ -31,19 +32,35 @@ export default function Header() {
                     {isAuthenticated ? (
                         <>
                             <li className='link'>
-                                <Link to='/dash'>Dash</Link>
+                                <Link to='/dash'>
+                                    <button>
+                                        <IconDashboard />
+                                    </button>
+                                </Link>
                             </li>
                             <li className='link'>
-                                <Link onClick={logoutUser}>Logout</Link>
+                                <Link onClick={logoutUser}>
+                                    <button>
+                                        <IconLogout />
+                                    </button>
+                                </Link>
                             </li>
                         </>
                     ) : (
                         <>
                             <li className='link'>
-                                <Link to='/'>Home</Link>
+                                <Link to='/'>
+                                    <button>
+                                        <IconHome />
+                                    </button>
+                                </Link>
                             </li>
                             <li className='link'>
-                                <Link to='/auth'>Auth</Link>
+                                <Link to='/auth'>
+                                    <button>
+                                        <IconLogin />
+                                    </button>
+                                </Link>
                             </li>
                         </>
                     )}

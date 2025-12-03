@@ -37,13 +37,19 @@
 }
 
 @layer components {
-    .link {
-        font: normal 1.2rem var(--font-primary);
-        text-decoration: none;
-        color: hsl(from var(--text-color) h s l);
+    .link button {
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
 
         &:hover {
-            text-decoration: underline;
+            background-color: var(--base-color);
+        }
+
+        &>svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-color);
         }
     }
 
