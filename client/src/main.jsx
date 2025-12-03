@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/WrappeProvider.jsx';
 
 import App from './App.jsx';
@@ -24,7 +25,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-    <WrapperProvider>
-        <RouterProvider router={router} />
-    </WrapperProvider>,
+    <HelmetProvider>
+        <WrapperProvider>
+            <RouterProvider router={router} />
+        </WrapperProvider>
+    </HelmetProvider>,
 );
