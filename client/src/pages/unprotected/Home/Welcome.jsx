@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import TypeRoute from '../../../components/typeRoute/typeRoute';
 
 export default function Welcome() {
     return (
-        <>
+        <TypeRoute isPrivate={false}>
             <Helmet>
                 <title>Usuários | Welcome</title>
                 <meta
@@ -11,7 +12,7 @@ export default function Welcome() {
                     content='Página inicial do sistema de cadastro de usuários'
                 />
             </Helmet>
-            <main className='flex flex-col items-center justify-center gap-8'>
+            <main className='col-span-2 flex flex-col items-center justify-center gap-8'>
                 <h1 className='font-primary text-7xl font-bold text-black'>Welcome!</h1>
                 <Link to='/auth'>
                     <button className='font-secundary cursor-pointer bg-black px-8 py-2 text-2xl text-white'>
@@ -19,6 +20,6 @@ export default function Welcome() {
                     </button>
                 </Link>
             </main>
-        </>
+        </TypeRoute>
     );
 }

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconMail, IconEyeOff } from '@tabler/icons-react';
-import { useAuthenticated } from '../../context/AuthContext';
-import { useMessages } from '../../context/MessagesContext';
+import { IconUser, IconMail, IconEyeOff } from '@tabler/icons-react';
+import { useAuthenticated } from '../../../context/AuthContext';
+import { useMessages } from '../../../context/MessagesContext';
 
-export default function SignIn({ changeForm }) {
+export default function SignUp({ changeForm }) {
     const [form, setForm] = useState({
+        name: '',
         email: '',
         password: '',
     });
@@ -17,7 +18,7 @@ export default function SignIn({ changeForm }) {
     async function submit(e) {
         e.preventDefault();
 
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form),
@@ -34,22 +35,48 @@ export default function SignIn({ changeForm }) {
         }
     }
 
-    function toSignup() {
-        setForm({ email: '', password: '' });
+    function toSignin() {
+        setForm({
+            name: '',
+            email: '',
+            password: '',
+        });
         changeForm();
     }
 
     return (
-        <form className='form' onSubmit={submit}>
+        <form className='form -translate-y-1/2 rotate-y-180' onSubmit={submit}>
             <h2 className='font-primary text-5xl font-bold text-black'>SignIn</h2>
             <div>
-                <label htmlFor='email-signin' className='font-secundary block text-lg text-black'>
+                <label htmlFor='name' className='font-secundary block text-lg text-black'>
+                    Name
+                </label>
+                <div className='relative'>
+                    <input
+                        type='text'
+                        id='name'
+                        placeholder='exemplo@email.com'
+                        required
+                        value={form.name}
+                        onChange={e => setForm({ ...form, name: e.target.value })}
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
+                    />
+                    <label
+                        htmlFor='name'
+                        className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
+                    >
+                        <IconUser className='h-8 w-8 stroke-black' />
+                    </label>
+                </div>
+            </div>
+            <div>
+                <label htmlFor='email' className='font-secundary block text-lg text-black'>
                     Email
                 </label>
                 <div className='relative'>
                     <input
                         type='email'
-                        id='email-signin'
+                        id='email'
                         placeholder='exemplo@email.com'
                         required
                         value={form.email}
@@ -57,7 +84,7 @@ export default function SignIn({ changeForm }) {
                         className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
                     />
                     <label
-                        htmlFor='email-signin'
+                        htmlFor='email'
                         className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
                     >
                         <IconMail className='h-8 w-8 stroke-black' />
@@ -65,16 +92,13 @@ export default function SignIn({ changeForm }) {
                 </div>
             </div>
             <div>
-                <label
-                    htmlFor='password-signin'
-                    className='font-secundary block text-lg text-black'
-                >
+                <label htmlFor='password' className='font-secundary block text-lg text-black'>
                     Password
                 </label>
                 <div className='relative'>
                     <input
                         type={showPassword ? 'text' : 'password'}
-                        id='password-signin'
+                        id='password'
                         placeholder='Your secret password'
                         required
                         value={form.password}
@@ -101,7 +125,7 @@ export default function SignIn({ changeForm }) {
             </button>
             <p className='text-2sm font-secundary text-black'>
                 Don't have an account?{' '}
-                <span onClick={toSignup} className='cursor-pointer text-black hover:underline'>
+                <span onClick={toSignin} className='cursor-pointer text-black hover:underline'>
                     To SignUp
                 </span>
             </p>

@@ -19,7 +19,7 @@
 
     .wrapper {
         display: grid;
-        grid-template: var(--height-header) calc(100vh - var(--height-header)) auto / 1fr;
+        grid-template: var(--height-header) calc(100vh - var(--height-header)) auto / auto 1fr;
         background-color: var(--base-color);
     }
 }

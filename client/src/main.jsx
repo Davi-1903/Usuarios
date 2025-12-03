@@ -3,10 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/WrappeProvider.jsx';
 
-import App from './App.jsx';
-import Welcome from './pages/Home/Welcome.jsx';
-import Dash from './pages/Home/Dash.jsx';
-import Auth from './Pages/Auth/Auth.jsx';
+import Layout from './Layout.jsx';
+import Welcome from './pages/unprotected/Home/Welcome.jsx';
+import Dash from './pages/protected/Home/Dash.jsx';
+import Auth from './Pages/unprotected/Auth/Auth.jsx';
 import Error404 from './pages/Errors/Error404.jsx';
 
 import './index.css';
@@ -14,7 +14,7 @@ import './index.css';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: <Layout />,
         children: [
             { index: true, element: <Welcome /> },
             { path: 'dash', element: <Dash /> },
