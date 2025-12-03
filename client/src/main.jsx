@@ -4,10 +4,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/WrappeProvider.jsx';
 
 import Layout from './Layout.jsx';
-import Welcome from './pages/unprotected/Home/Welcome.jsx';
-import Dash from './pages/protected/Home/Dash.jsx';
-import Auth from './Pages/unprotected/Auth/Auth.jsx';
-import Error404 from './pages/Errors/Error404.jsx';
+import Welcome from './pages/unprotected/home/welcome.jsx';
+import Dash from './pages/protected/home/dash.jsx';
+import Auth from './pages/unprotected/auth';
+import Error404 from './pages/Errors/404';
 
 import './index.css';
 

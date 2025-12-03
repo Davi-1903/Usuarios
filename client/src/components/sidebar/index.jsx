@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IconDashboard, IconLogout } from '@tabler/icons-react';
-import { useAuthenticated } from '../../context/AuthContext';
+import { useAuthenticated } from '../../context/authContext';
 
 export default function Sidebar() {
     const { setAuthenticated } = useAuthenticated();

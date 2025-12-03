@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IconX } from '@tabler/icons-react';
-import { useMessages } from '../../context/MessagesContext';
+import { useMessages } from '../../context/messagesContext';
 
 export default function Message({ id, title, description, ok }) {
     const [isDeleting, setDeleting] = useState(false);

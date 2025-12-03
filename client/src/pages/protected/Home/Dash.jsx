@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import TypeRoute from '../../../components/typeRoute/typeRoute';
+import TypeRoute from '../../../components/typeRoute';
 
 export default function Dash() {
     const [name, setName] = useState(null);

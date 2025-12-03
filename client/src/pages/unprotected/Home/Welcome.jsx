@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import TypeRoute from '../../../components/typeRoute/typeRoute';
+import TypeRoute from '../../../components/typeRoute';
 
 export default function Welcome() {
     return (

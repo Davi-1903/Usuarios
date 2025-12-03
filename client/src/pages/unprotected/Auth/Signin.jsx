@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
-import { useAuthenticated } from '../../../context/AuthContext';
-import { useMessages } from '../../../context/MessagesContext';
+import { useAuthenticated } from '../../../context/authContext';
+import { useMessages } from '../../../context/messagesContext';
 
 export default function SignIn({ changeForm }) {
     const [form, setForm] = useState({
@@ -54,7 +54,7 @@ export default function SignIn({ changeForm }) {
                         required
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
                     />
                     <label
                         htmlFor='email-signin'
@@ -79,7 +79,7 @@ export default function SignIn({ changeForm }) {
                         required
                         value={form.password}
                         onChange={e => setForm({ ...form, password: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg outline-0'
+                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
                     />
                     <label
                         htmlFor='show-signin'

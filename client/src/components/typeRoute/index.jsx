@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuthenticated } from '../../context/AuthContext';
+import { useAuthenticated } from '../../context/authContext';
 
 export default function TypeRoute({ children, isPrivate = false }) {
     const { isAuthenticated } = useAuthenticated();

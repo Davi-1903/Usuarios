@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import SignIn from './Signin';
-import SignUp from './Signup';
-import TypeRoute from '../../../components/typeRoute/typeRoute';
+import SignIn from './signin';
+import SignUp from './signup';
+import TypeRoute from '../../../components/typeRoute';
 
 export default function Auth() {
     const [invert, setInvert] = useState(false);
