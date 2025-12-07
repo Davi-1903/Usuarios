@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { IconX } from '@tabler/icons-react';
 import { useMessages } from '../../context/messagesContext';
 
-export default function Message({ id, title, description, ok }) {
+export default function Message({ id, description, ok }) {
     const [isDeleting, setDeleting] = useState(false);
     const { setMessages } = useMessages();
 
@@ -22,9 +22,8 @@ export default function Message({ id, title, description, ok }) {
             className={`pointer-events-auto grid grid-cols-[1fr_auto] grid-rows-[1fr_auto] overflow-x-hidden ${isDeleting ? 'animate-delete-message' : 'animate-new-message'} ${ok ? 'bg-green' : 'bg-red'} `}
             onAnimationEnd={() => onHandleAnimationEnd(id)}
         >
-            <div className='flex-1 p-2'>
-                <h2 className='font-primary mb-2 text-xl text-white'>{title}</h2>
-                <p className='font-secundary text-sm text-wrap text-white'>{description}</p>
+            <div className='flex-1 p-4'>
+                <p className='font-secundary text-md text-wrap text-white'>{description}</p>
             </div>
             <div>
                 <button className='cursor-pointer p-1' onClick={() => setDeleting(true)}>

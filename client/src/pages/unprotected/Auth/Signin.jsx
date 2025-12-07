@@ -29,7 +29,7 @@ export default function SignIn({ changeForm }) {
         } else {
             setMessages(prev => [
                 ...prev,
-                { id: prev.length + 1, title: 'Error', ok: false, description: data.message },
+                { id: prev.length + 1, ok: false, description: data.message },
             ]);
         }
     }
