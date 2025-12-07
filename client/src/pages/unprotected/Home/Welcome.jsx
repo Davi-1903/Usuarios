@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import TypeRoute from '../../../components/typeRoute';
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Welcome() {
     return (
-        <TypeRoute isPrivate={false}>
+        <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>Usuários | Welcome</title>
                 <meta
@@ -20,6 +20,6 @@ export default function Welcome() {
                     </button>
                 </Link>
             </main>
-        </TypeRoute>
+        </ProtectedRoute>
     );
 }

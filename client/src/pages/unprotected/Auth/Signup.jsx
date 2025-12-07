@@ -46,7 +46,7 @@ export default function SignUp({ changeForm }) {
 
     return (
         <form className='form -translate-y-1/2 rotate-y-180' onSubmit={submit}>
-            <h2 className='font-primary text-5xl font-bold text-black'>SignIn</h2>
+            <h2 className='font-primary text-5xl font-bold text-black'>SignUp</h2>
             <div>
                 <label htmlFor='name' className='font-secundary block text-lg text-black'>
                     Name
@@ -121,12 +121,12 @@ export default function SignUp({ changeForm }) {
                 type='submit'
                 className='font-primary h-12 w-full cursor-pointer bg-black text-xl text-white'
             >
-                SignIn
+                SignUp
             </button>
             <p className='text-2sm font-secundary text-black'>
                 Don't have an account?{' '}
                 <span onClick={toSignin} className='cursor-pointer text-black hover:underline'>
-                    To SignUp
+                    To SignIn
                 </span>
             </p>
         </form>

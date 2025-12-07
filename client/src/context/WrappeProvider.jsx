@@ -1,4 +1,4 @@
-import { AuthenticatedProvider } from './AuthContext';
+import { AuthenticatedProvider } from './authContext';
 import { MessagesProvider } from './MessagesContext';
 
 export default function WrapperProvider({ children }) {

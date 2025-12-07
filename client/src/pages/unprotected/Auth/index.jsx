@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import SignIn from './signin';
 import SignUp from './signup';
-import TypeRoute from '../../../components/typeRoute';
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Auth() {
     const [invert, setInvert] = useState(false);
@@ -12,7 +12,7 @@ export default function Auth() {
     }
 
     return (
-        <TypeRoute isPrivate={false}>
+        <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>Usuários | Auth</title>
                 <meta
@@ -28,6 +28,6 @@ export default function Auth() {
                     <SignIn changeForm={changeForm} />
                 </div>
             </main>
-        </TypeRoute>
+        </ProtectedRoute>
     );
 }

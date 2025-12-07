@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import TypeRoute from '../../../components/typeRoute';
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Dash() {
     const [name, setName] = useState(null);
@@ -12,7 +12,7 @@ export default function Dash() {
     }, []);
 
     return (
-        <TypeRoute isPrivate={true}>
+        <ProtectedRoute isPrivate={true}>
             <Helmet>
                 <title>Usuários | Dash</title>
                 <meta name='description' content='Home do sistema de cadastro de usuários' />
@@ -22,6 +22,6 @@ export default function Dash() {
                     Welcome, {name}
                 </h1>
             </main>
-        </TypeRoute>
+        </ProtectedRoute>
     );
 }
