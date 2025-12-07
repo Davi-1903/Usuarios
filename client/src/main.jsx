@@ -1,15 +1,16 @@
+import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/WrappeProvider.jsx';
 
 import Layout from './Layout.jsx';
-import Welcome from './pages/unprotected/home/welcome.jsx';
-import Dash from './pages/protected/home/dash.jsx';
-import Auth from './pages/unprotected/auth';
-import Error404 from './pages/Errors/404';
+const Welcome = lazy(() => import('./pages/unprotected/home/welcome.jsx'));
+const Dash = lazy(() => import('./pages/protected/home/dash.jsx'));
+const Auth = lazy(() => import('./pages/unprotected/auth'));
+const Error404 = lazy(() => import('./pages/errors/404'));
 
-import './index.css';
+import './globals.css';
 
 const router = createBrowserRouter([
     {

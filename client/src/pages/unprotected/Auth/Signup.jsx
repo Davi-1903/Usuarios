@@ -124,7 +124,7 @@ export default function SignUp({ changeForm }) {
                 SignUp
             </button>
             <p className='text-2sm font-secundary text-black'>
-                Don't have an account?{' '}
+                Do you already have an account?{' '}
                 <span onClick={toSignin} className='cursor-pointer text-black hover:underline'>
                     To SignIn
                 </span>
