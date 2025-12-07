@@ -1,10 +1,28 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuthenticated } from '../../context/authContext';
+import Loading from '../loading';
 
 export default function ProtectedRoute({ children, isPrivate }) {
-    const { isAuthenticated } = useAuthenticated();
+    const [isOk, setOk] = useState(null);
+    const { setAuthenticated } = useAuthenticated();
 
-    if (isPrivate && !isAuthenticated) return <Navigate to='/auth' />;
-    if (!isPrivate && isAuthenticated) return <Navigate to='/dash' />;
+    useEffect(() => {
+        fetch('/api/auth/check', { credentials: 'include' })
+            .then(res => {
+                const result = res.status === 200;
+                setOk(result);
+                setAuthenticated(result);
+            })
+            .catch(err => {
+                setOk(false);
+                setAuthenticated(false);
+                console.error(err);
+            });
+    }, [setAuthenticated]);
+
+    if (isOk === null) return <Loading />;
+    if (isPrivate && !isOk) return <Navigate to='/auth' />;
+    if (!isPrivate && isOk) return <Navigate to='/dash' />;
     return children;
 }

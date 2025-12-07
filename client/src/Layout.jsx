@@ -1,5 +1,5 @@
 import { useMessages } from './context/MessagesContext';
-import { useAuthenticated } from './context/AuthContext';
+import { useAuthenticated } from './context/authContext';
 import Footer from './components/Footer';
 import Message from './components/Messages';
 import ProtectedLayout from './pages/protected/Layout';
