@@ -20,7 +20,7 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
     - **`client/`**
 
         ```powershell
-        npm install
+        npm install --legacy-peer-deps
         ```
 
     - **`server/`**
