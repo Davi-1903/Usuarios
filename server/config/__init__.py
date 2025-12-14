@@ -12,7 +12,7 @@ def config_app(app):
     CORS(app, supports_credentials=True, origins=['http://localhost:5000'])
 
     login_config(app)
-    init_database(app)
+    init_database()
 
 
 def login_config(app):

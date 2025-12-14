@@ -1,15 +1,17 @@
 from flask_login import UserMixin
-from database import db
+from sqlalchemy import Column, Integer, String
+from database import Base, Session
 
 
-class User(UserMixin, db.Model):
+class User(UserMixin, Base):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(150), nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    email = Column(String(100), nullable=False, unique=True)
+    password = Column(String(150), nullable=False)
 
     @classmethod
     def get(cls, user_id: int) -> 'User | None':
-        return db.session.get(cls, user_id)
+        with Session() as session:
+            return session.get(cls, user_id)

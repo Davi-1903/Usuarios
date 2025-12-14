@@ -1,18 +1,22 @@
-from flask_sqlalchemy import SQLAlchemy
 import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
 
-db = SQLAlchemy()
+load_dotenv()
+
+DATABASE_URI = os.environ.get('DATABASE_URI')
+if DATABASE_URI is None:
+    raise RuntimeError('DATABASE_URI não foi definida')
+
+engine = create_engine(DATABASE_URI)
+Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
-def init_database(app):
-    DATABASE_URI = os.environ.get('DATABASE_URI')
-    if DATABASE_URI is None:
-        raise RuntimeError('DATABASE_URI não foi definida')
-    
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.init_app(app)
+class Base(DeclarativeBase):
+    pass
 
-    with app.app_context():
-        db.create_all()
+
+def init_database():
+    Base.metadata.create_all(engine)
