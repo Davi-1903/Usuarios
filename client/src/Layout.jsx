@@ -1,7 +1,7 @@
-import { useMessages } from './context/MessagesContext';
+import { useMessages } from './context/messagesContext';
 import { useAuthenticated } from './context/authContext';
-import Footer from './components/Footer';
-import Message from './components/Messages';
+import Footer from './components/footer';
+import Message from './components/messages';
 import ProtectedLayout from './pages/protected/Layout';
 import UnprotectedLayout from './pages/unprotected/Layout';
 
