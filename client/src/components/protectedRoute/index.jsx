@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuthenticated } from '../../context/authContext';
+import { useAuthenticated } from '../../context/AuthContext';
 import Loading from '../loading';
 
 export default function ProtectedRoute({ children, isPrivate }) {

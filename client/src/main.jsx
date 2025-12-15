@@ -5,9 +5,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/WrappeProvider.jsx';
 
 import Layout from './Layout.jsx';
-const Welcome = lazy(() => import('./pages/unprotected/home/welcome.jsx'));
-const Dash = lazy(() => import('./pages/protected/home/dash.jsx'));
-const Auth = lazy(() => import('./pages/unprotected/auth'));
+const Welcome = lazy(() => import('./pages/unprotected/Home/Welcome.jsx'));
+const Dash = lazy(() => import('./pages/protected/Home/Dash.jsx'));
+const Auth = lazy(() => import('./pages/unprotected/Auth'));
 const Error404 = lazy(() => import('./pages/errors/404'));
 
 import './globals.css';

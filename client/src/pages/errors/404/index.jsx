@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useAuthenticated } from '../../../context/authContext';
+import { useAuthenticated } from '../../../context/AuthContext';
 
 export default function Error404() {
     const { isAuthenticated } = useAuthenticated();

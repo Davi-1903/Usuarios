@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import SignIn from './signin';
-import SignUp from './signup';
+import SignIn from './Signin';
+import SignUp from './Signup';
 import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Auth() {
