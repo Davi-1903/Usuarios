@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
-import { useAuthenticated } from '../../../context/authContext';
-import { useMessages } from '../../../context/messagesContext';
+import { useAuthenticated } from '../../../context/AuthContext';
+import { useMessages } from '../../../context/MessagesContext';
 
 export default function SignIn({ changeForm }) {
     const [form, setForm] = useState({
