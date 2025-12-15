@@ -1,8 +1,8 @@
-# Usuários
+# 😊 Usuários
 
 Aplicação de login extremamente simples para aprendar a integrar `Flask`, `Tailwind`, `React` e `MySQL`.
 
-## Como executar
+## 💻 Como executar
 
 Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, é preciso ter o `Python` e o `NodeJS` instalados.
 
@@ -52,3 +52,21 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
 > Use ambiente virtual 😉
 
 Se tudo ocorrer bem, a aplicação está rodando em [`http://localhost:5000`](http://localhost:5000)
+
+## 🐋 Deploy com Docker
+
+1. **Crie um arquivo `.env` na raiz do projeto e adicione**
+
+    ```env
+    SECRET_KEY='<CHAVE SECRETA>'
+    DATABASE_URI='mysql+pymysql://root:<SENHA>@mysql:<PORTA>/db_users'
+    MYSQL_ROOT_PASSWORD='<SENHA>'
+    ```
+
+2. **Crie e inicialize o container**
+
+    ```powershell
+    docker compose up -d
+    ```
+
+Se tudo ocorrer bem, a aplicação está rodando em [`http://localhost:3000`](http://localhost:3000)
