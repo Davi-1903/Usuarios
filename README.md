@@ -59,8 +59,7 @@ Se tudo ocorrer bem, a aplicação está rodando em [`http://localhost:5000`](ht
 
     ```env
     SECRET_KEY='<CHAVE SECRETA>'
-    DATABASE_URI='mysql+pymysql://root:<SENHA>@mysql:<PORTA>/db_users'
-    MYSQL_ROOT_PASSWORD='<SENHA>'
+    DATABASE_URI='mysql+pymysql://root@mysql:<PORTA>/db_users'
     ```
 
 2. **Crie e inicialize o container**
