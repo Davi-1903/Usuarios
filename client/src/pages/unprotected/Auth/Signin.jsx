@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff } from '@tabler/icons-react';
 import { useAuthenticated } from '../../../context/AuthContext';
 import { useMessages } from '../../../context/MessagesContext';
+import getCSRF from '../../../api/csrf';
 
 export default function SignIn({ changeForm }) {
     const [form, setForm] = useState({
@@ -16,10 +17,12 @@ export default function SignIn({ changeForm }) {
 
     async function submit(e) {
         e.preventDefault();
+        const csrf = await getCSRF();
 
         const response = await fetch('/api/auth/login', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf },
             body: JSON.stringify(form),
         });
         const data = await response.json();

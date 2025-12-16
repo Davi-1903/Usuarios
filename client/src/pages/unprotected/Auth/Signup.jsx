@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconUser, IconMail, IconEyeOff } from '@tabler/icons-react';
 import { useAuthenticated } from '../../../context/AuthContext';
 import { useMessages } from '../../../context/MessagesContext';
+import getCSRF from '../../../api/csrf';
 
 export default function SignUp({ changeForm }) {
     const [form, setForm] = useState({
@@ -17,10 +18,12 @@ export default function SignUp({ changeForm }) {
 
     async function submit(e) {
         e.preventDefault();
+        const csrf = await getCSRF();
 
         const response = await fetch('/api/auth/register', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf },
             body: JSON.stringify(form),
         });
         const data = await response.json();
@@ -55,7 +58,7 @@ export default function SignUp({ changeForm }) {
                     <input
                         type='text'
                         id='name'
-                        placeholder='exemplo@email.com'
+                        placeholder="What's your name?"
                         required
                         value={form.name}
                         onChange={e => setForm({ ...form, name: e.target.value })}
