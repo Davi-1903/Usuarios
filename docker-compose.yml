@@ -9,8 +9,6 @@ services:
         environment:
             - SECRET_KEY=${SECRET_KEY}
             - DATABASE_URI=${DATABASE_URI}
-        expose:
-            - '5000'
         depends_on:
             - mysql
 

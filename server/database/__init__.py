@@ -17,13 +17,14 @@ def get_connection(DATABASE_URI: str) -> Engine:
     else:
         raise RuntimeError('O MySQL não subiu. Desisto.\nAss: Flask')
 
+
 load_dotenv()
 
 DATABASE_URI = os.environ.get('DATABASE_URI')
 if DATABASE_URI is None:
     raise RuntimeError('DATABASE_URI não foi definida')
 
-engine = get_connection(DATABASE_URI)    
+engine = get_connection(DATABASE_URI)
 Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
