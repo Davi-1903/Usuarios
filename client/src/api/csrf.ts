@@ -1,4 +1,4 @@
-export default async function getCSRF() {
+export default async function getCSRF(): Promise<string> {
     const response = await fetch('/api/auth/csrf', {
         credentials: 'include',
     });

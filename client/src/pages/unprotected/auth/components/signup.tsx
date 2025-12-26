@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconUser, IconMail, IconEyeOff, IconEye } from '@tabler/icons-react';
-import { useAuthenticated } from '../../../context/AuthContext';
-import { useMessages } from '../../../context/MessagesContext';
-import getCSRF from '../../../api/csrf';
+import { useAuthenticated } from '../../../../context/authContext';
+import { useMessages } from '../../../../context/messagesContext';
+import type { FormProps } from '../../../../interfaces/Props';
+import getCSRF from '../../../../api/csrf';
 
-export default function SignUp({ changeForm }) {
+export default function SignUp({ changeForm }: FormProps) {
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -16,7 +17,7 @@ export default function SignUp({ changeForm }) {
     const { setMessages } = useMessages();
     const navigate = useNavigate();
 
-    async function submit(e) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
         const csrf = await getCSRF();
 
@@ -38,7 +39,7 @@ export default function SignUp({ changeForm }) {
         }
     }
 
-    function toSignin() {
+    function toSignin(): void {
         setForm({
             name: '',
             email: '',
@@ -48,7 +49,7 @@ export default function SignUp({ changeForm }) {
     }
 
     return (
-        <form className='form -translate-y-1/2 rotate-y-180' onSubmit={submit}>
+        <form className='form -translate-y-1/2 rotate-y-180' onSubmit={handleSubmit}>
             <h2 className='font-primary text-5xl font-bold text-black'>SignUp</h2>
             <div>
                 <label htmlFor='name' className='font-secundary block text-lg text-black'>

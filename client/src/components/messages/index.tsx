@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { IconX } from '@tabler/icons-react';
-import { useMessages } from '../../context/MessagesContext';
+import { useMessages } from '../../context/messagesContext';
+import type { Message as MessageType } from '../../interfaces/Objects';
 
-export default function Message({ id, description, ok }) {
+export default function Message({ id, description, ok }: MessageType) {
     const [isDeleting, setDeleting] = useState(false);
     const { setMessages } = useMessages();
 
-    function handleDeleteMessage(id) {
+    function handleDeleteMessage(id: number): void {
         setMessages(prev => prev.filter(message => message.id !== id));
     }
 
-    function onHandleAnimationEnd(id) {
+    function onHandleAnimationEnd(id: number): void {
         if (isDeleting) {
             handleDeleteMessage(id);
             setDeleting(false);

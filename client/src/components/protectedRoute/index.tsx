@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuthenticated } from '../../context/AuthContext';
+import { useAuthenticated } from '../../context/authContext';
 import Loading from '../loading';
+import type { ProtectedRouteProps } from '../../interfaces/Props';
 
-export default function ProtectedRoute({ children, isPrivate }) {
-    const [isOk, setOk] = useState(null);
+export default function ProtectedRoute({ children, isPrivate }: ProtectedRouteProps) {
+    const [isOk, setOk] = useState<boolean | null>(null);
     const [isLoading, setLoading] = useState(false);
     const { setAuthenticated } = useAuthenticated();
 

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import SignIn from './Signin';
-import SignUp from './Signup';
+import SignIn from './components/signin';
+import SignUp from './components/signup';
 import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Auth() {
     const [invert, setInvert] = useState(false);
 
-    function changeForm() {
+    function changeForm(): void {
         setInvert(!invert);
     }
 

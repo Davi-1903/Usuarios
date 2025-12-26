@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Dash() {
-    const [name, setName] = useState(null);
+    const [name, setName] = useState<string | null>(null);
 
     useEffect(() => {
         fetch('/api/user', { credentials: 'include' })

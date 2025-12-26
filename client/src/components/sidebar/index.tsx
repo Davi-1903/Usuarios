@@ -1,13 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IconDashboard, IconLogout } from '@tabler/icons-react';
-import { useAuthenticated } from '../../context/AuthContext';
+import { useAuthenticated } from '../../context/authContext';
 import getCSRF from '../../api/csrf';
+import type { MouseEvent } from 'react';
 
 export default function Sidebar() {
     const { setAuthenticated } = useAuthenticated();
     const navigate = useNavigate();
 
-    async function handleLogout(e) {
+    async function handleLogout(e: MouseEvent<HTMLButtonElement>): Promise<void> {
         e.preventDefault();
         const csrf = await getCSRF();
 

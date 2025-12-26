@@ -2,13 +2,13 @@ import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import WrapperProvider from './context/WrappeProvider.jsx';
+import WrapperProvider from './context/wrappeProvider';
 
-import Layout from './Layout.jsx';
-const Welcome = lazy(() => import('./pages/unprotected/Home/Welcome.jsx'));
-const Dash = lazy(() => import('./pages/protected/Home/Dash.jsx'));
-const Auth = lazy(() => import('./pages/unprotected/Auth'));
-const Error404 = lazy(() => import('./pages/errors/404'));
+import Layout from './layout.tsx';
+const Welcome = lazy(() => import('./pages/unprotected/home/welcome.tsx'));
+const Dash = lazy(() => import('./pages/protected/home/dash.tsx'));
+const Auth = lazy(() => import('./pages/unprotected/auth'));
+const Error404 = lazy(() => import('./pages/errors/error404'));
 
 import './globals.css';
 
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')!).render(
     <HelmetProvider>
         <WrapperProvider>
             <RouterProvider router={router} />

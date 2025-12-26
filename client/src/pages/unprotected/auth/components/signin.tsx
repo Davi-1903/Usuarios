@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconMail, IconEyeOff, IconEye } from '@tabler/icons-react';
-import { useAuthenticated } from '../../../context/AuthContext';
-import { useMessages } from '../../../context/MessagesContext';
-import getCSRF from '../../../api/csrf';
+import { useAuthenticated } from '../../../../context/authContext';
+import { useMessages } from '../../../../context/messagesContext';
+import type { FormProps } from '../../../../interfaces/Props';
+import getCSRF from '../../../../api/csrf';
 
-export default function SignIn({ changeForm }) {
+export default function SignIn({ changeForm }: FormProps) {
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -15,7 +16,7 @@ export default function SignIn({ changeForm }) {
     const { setMessages } = useMessages();
     const navigate = useNavigate();
 
-    async function submit(e) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
         const csrf = await getCSRF();
 
@@ -37,13 +38,13 @@ export default function SignIn({ changeForm }) {
         }
     }
 
-    function toSignup() {
+    function toSignup(): void {
         setForm({ email: '', password: '' });
         changeForm();
     }
 
     return (
-        <form className='form' onSubmit={submit}>
+        <form className='form' onSubmit={handleSubmit}>
             <h2 className='font-primary text-5xl font-bold text-black'>SignIn</h2>
             <div>
                 <label htmlFor='email-signin' className='font-secundary block text-lg text-black'>

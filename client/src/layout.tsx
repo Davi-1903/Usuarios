@@ -1,9 +1,9 @@
-import { useMessages } from './context/MessagesContext';
-import { useAuthenticated } from './context/AuthContext';
+import { useMessages } from './context/messagesContext';
+import { useAuthenticated } from './context/authContext';
 import Footer from './components/footer';
 import Message from './components/messages';
-import ProtectedLayout from './pages/protected/Layout';
-import UnprotectedLayout from './pages/unprotected/Layout';
+import ProtectedLayout from './pages/protected/layout';
+import UnprotectedLayout from './pages/unprotected/layout';
 
 export default function App() {
     const { isAuthenticated } = useAuthenticated();
