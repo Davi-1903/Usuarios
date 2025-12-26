@@ -58,7 +58,7 @@ def login():
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
 
-@bp.get('/logout')
+@bp.post('/logout')
 @login_required
 def logout():
     logout_user()

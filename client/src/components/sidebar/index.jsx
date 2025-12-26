@@ -1,19 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IconDashboard, IconLogout } from '@tabler/icons-react';
 import { useAuthenticated } from '../../context/AuthContext';
+import getCSRF from '../../api/csrf';
 
 export default function Sidebar() {
     const { setAuthenticated } = useAuthenticated();
     const navigate = useNavigate();
 
-    async function logoutUser(e) {
+    async function handleLogout(e) {
         e.preventDefault();
+        const csrf = await getCSRF();
 
         const confirmed = confirm('Você tem certeza?');
         if (!confirmed) return;
 
         const response = await fetch('/api/auth/logout', {
+            method: 'POST',
             credentials: 'include',
+            headers: { 'X-CSRFToken': csrf },
         });
 
         const data = await response.json();
@@ -35,11 +39,9 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li className='link'>
-                    <Link onClick={logoutUser}>
-                        <button>
-                            <IconLogout />
-                        </button>
-                    </Link>
+                    <button onClick={handleLogout}>
+                        <IconLogout />
+                    </button>
                 </li>
             </ul>
         </nav>
