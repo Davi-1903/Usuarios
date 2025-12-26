@@ -5,9 +5,14 @@ import Loading from '../loading';
 
 export default function ProtectedRoute({ children, isPrivate }) {
     const [isOk, setOk] = useState(null);
+    const [isLoading, setLoading] = useState(false);
     const { setAuthenticated } = useAuthenticated();
 
     useEffect(() => {
+        const loadingId = setTimeout(() => {
+            setLoading(true);
+        }, 100);
+
         fetch('/api/auth/check', { credentials: 'include' })
             .then(res => {
                 const result = res.status === 200;
@@ -18,11 +23,17 @@ export default function ProtectedRoute({ children, isPrivate }) {
                 setOk(false);
                 setAuthenticated(false);
                 console.error(err);
+            })
+            .finally(() => {
+                setLoading(false);
+                clearTimeout(loadingId);
             });
+
+        return () => clearTimeout(loadingId);
     }, [setAuthenticated]);
 
-    if (isOk === null) return <Loading />;
-    if (isPrivate && !isOk) return <Navigate to='/auth' />;
-    if (!isPrivate && isOk) return <Navigate to='/dash' />;
-    return children;
+    if (isOk === null && isLoading) return <Loading />;
+    if (isOk !== null && isPrivate && !isOk) return <Navigate to='/auth' />;
+    if (isOk !== null && !isPrivate && isOk) return <Navigate to='/dash' />;
+    if (isOk !== null) return children;
 }

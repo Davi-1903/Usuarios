@@ -17,11 +17,11 @@ export default function Dash() {
                 <title>Usuários | Dash</title>
                 <meta name='description' content='Home do sistema de cadastro de usuários' />
             </Helmet>
-            <main className='row-span-2 grid place-items-center'>
+            <>
                 <h1 className='font-primary text-3xl font-bold text-black lg:text-7xl'>
                     Welcome, {name}
                 </h1>
-            </main>
+            </>
         </ProtectedRoute>
     );
 }

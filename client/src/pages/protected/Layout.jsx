@@ -5,7 +5,9 @@ export default function ProtectedLayout() {
     return (
         <>
             <Sidebar />
-            <Outlet />
+            <main className='row-span-2 grid place-items-center'>
+                <Outlet />
+            </main>
         </>
     );
 }
