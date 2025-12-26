@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconMail, IconEyeOff } from '@tabler/icons-react';
+import { IconMail, IconEyeOff, IconEye } from '@tabler/icons-react';
 import { useAuthenticated } from '../../../context/AuthContext';
 import { useMessages } from '../../../context/MessagesContext';
 import getCSRF from '../../../api/csrf';
@@ -84,16 +84,17 @@ export default function SignIn({ changeForm }) {
                         onChange={e => setForm({ ...form, password: e.target.value })}
                         className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
                     />
-                    <label
-                        htmlFor='show-signin'
+                    <button
+                        type='button'
                         className='absolute top-[calc(3rem*0.1)] right-[calc(3rem*0.1)] grid aspect-square h-8/10 cursor-pointer place-items-center'
+                        onClick={() => setShow(!showPassword)}
                     >
-                        <IconEyeOff
-                            id='show-signin'
-                            onClick={() => setShow(!showPassword)}
-                            className='h-8 w-8 stroke-black'
-                        />
-                    </label>
+                        {showPassword ? (
+                            <IconEye className='h-8 w-8 stroke-black' />
+                        ) : (
+                            <IconEyeOff className='h-8 w-8 stroke-black' />
+                        )}
+                    </button>
                 </div>
             </div>
             <button
