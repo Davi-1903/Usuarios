@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import os
 
 
-def config_app(app):
+def config_app(app: Flask):
     load_dotenv()
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -25,10 +25,10 @@ def config_app(app):
     csrf = CSRFProtect(app)
 
     login_config(app)
-    init_database()
+    init_database(app)
 
 
-def login_config(app):
+def login_config(app: Flask):
     login_manager = LoginManager(app)
 
     @login_manager.user_loader

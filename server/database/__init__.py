@@ -1,36 +1,34 @@
 import os
 from time import sleep
-from dotenv import load_dotenv
-from sqlalchemy import Engine, create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 from sqlalchemy.exc import OperationalError
 
 
-def get_connection(DATABASE_URI: str) -> Engine:
+def check_connection(db: SQLAlchemy):
     for _ in range(10):
         try:
-            engine = create_engine(DATABASE_URI)
-            engine.connect()
-            return engine
+            with db.engine.connect() as connection:
+                connection.execute(text('SELECT 1'))
+            return
         except OperationalError:
             sleep(3)
-    else:
-        raise RuntimeError('O MySQL não subiu. Desisto.\nAss: Flask')
+    raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
 
 
-load_dotenv()
-
-DATABASE_URI = os.environ.get('DATABASE_URI')
-if DATABASE_URI is None:
-    raise RuntimeError('DATABASE_URI não foi definida')
-
-engine = get_connection(DATABASE_URI)
-Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+db = SQLAlchemy()
 
 
-class Base(DeclarativeBase):
-    pass
+def init_database(app: Flask):
+    DATABASE_URI = os.getenv('DATABASE_URI')
+    if DATABASE_URI is None or DATABASE_URI == '':
+        raise RuntimeError('DATABASE_URI não foi definida')
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
 
-
-def init_database():
-    Base.metadata.create_all(engine)
+    with app.app_context():
+        db.create_all()
+        check_connection(db)
