@@ -17,6 +17,7 @@ dist
 dist-ssr
 *.local
 *.md
+LICENSE
 
 # Variáveis de ambiente e Ambiente virtual
 .env*
