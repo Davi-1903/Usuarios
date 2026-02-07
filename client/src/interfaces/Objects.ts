@@ -1,5 +1,11 @@
 import type { Dispatch, SetStateAction } from 'react';
 
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+
 export interface Message {
     id: number;
     description: string;

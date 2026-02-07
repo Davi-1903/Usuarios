@@ -4,7 +4,7 @@ import { IconUser, IconMail, IconEyeOff, IconEye } from '@tabler/icons-react';
 import { useAuthenticated } from '../../../../context/authContext';
 import { useMessages } from '../../../../context/messagesContext';
 import type { FormProps } from '../../../../interfaces/Props';
-import getCSRF from '../../../../api/csrf';
+import { POST } from '../../../../api/users';
 
 export default function SignUp({ changeForm }: FormProps) {
     const [form, setForm] = useState({
@@ -19,15 +19,11 @@ export default function SignUp({ changeForm }: FormProps) {
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
-        const csrf = await getCSRF();
 
-        const response = await fetch('/api/auth/register', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf },
-            body: JSON.stringify(form),
-        });
-        const data = await response.json();
+        const data = await POST<{ ok: boolean; redirect: string; message: string }>(
+            '/api/auth/register',
+            form,
+        );
         if (data.ok) {
             setAuthenticated(true);
             navigate(data.redirect);

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ProtectedRoute from '../../../components/protectedRoute';
+import { GET } from '../../../api/users';
 
 export default function Dash() {
     const [name, setName] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('/api/user', { credentials: 'include' })
-            .then(res => res.json())
-            .then(data => setName(data.name));
+        GET('/api/user').then(data => setName(data.name));
     }, []);
 
     return (

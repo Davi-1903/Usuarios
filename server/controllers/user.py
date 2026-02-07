@@ -9,6 +9,7 @@ bp = Blueprint('user', __name__, url_prefix='/api')
 @login_required
 def get_user():
     return jsonify({
+        'id': current_user.id,
         'name': current_user.name,
         'email': current_user.email
     }), 200
