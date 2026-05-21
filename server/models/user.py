@@ -1,15 +1,11 @@
-from flask_login import UserMixin
-from database import db
+from sqlmodel import SQLModel, Field
+from pydantic import EmailStr
 
 
-class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+class User(SQLModel, table=True):
+    __tablename__ = 'users' # type: ignore
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(150), nullable=False)
-
-    @classmethod
-    def get(cls, user_id: int) -> 'User | None':
-        return db.session.get(cls, user_id)
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(max_length=100, nullable=False)
+    email: EmailStr = Field(max_length=100, nullable=False, unique=True)
+    password: str = Field(max_length=255, nullable=False)

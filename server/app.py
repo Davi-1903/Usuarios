@@ -1,11 +1,12 @@
-from flask import Flask
-from controllers import user
-from controllers import auth
-from config import config_app
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from server.database import create_database
 
 
-app = Flask(__name__)
-config_app(app)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_database()
+    yield
 
-app.register_blueprint(user.bp)
-app.register_blueprint(auth.bp)
+
+app = FastAPI(lifespan=lifespan)
