@@ -1,6 +1,6 @@
 from typing import Any, Generator
 from sqlmodel import SQLModel, create_engine, Session
-from server.utils import get_env
+from utils import get_env
 
 
 DATABASE_URI = get_env('DATABASE_URI')
