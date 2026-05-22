@@ -19,5 +19,6 @@ export interface MessagesContextType {
 
 export interface AuthenticatedContextType {
     isAuthenticated: boolean;
-    setAuthenticated: Dispatch<SetStateAction<boolean>>;
+    login: (token: string) => void;
+    logout: () => void;
 }

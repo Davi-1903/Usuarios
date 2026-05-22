@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import WrapperProvider from './context/wrappeProvider';
+import WrapperProvider from './context/wrapperProvider.tsx';
 
 import Layout from './layout.tsx';
 const Welcome = lazy(() => import('./pages/unprotected/home/welcome.tsx'));

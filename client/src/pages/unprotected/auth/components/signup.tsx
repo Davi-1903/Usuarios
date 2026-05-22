@@ -13,24 +13,28 @@ export default function SignUp({ changeForm }: FormProps) {
         password: '',
     });
     const [showPassword, setShow] = useState(false);
-    const { setAuthenticated } = useAuthenticated();
+    const { login } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
 
-        const data = await POST<{ ok: boolean; redirect: string; message: string }>(
-            '/api/auth/register',
-            form,
-        );
-        if (data.ok) {
-            setAuthenticated(true);
-            navigate(data.redirect);
+        type returnType = {
+            status: number;
+            token: string;
+            token_type: string;
+            detail: string;
+        };
+        const data = await POST<returnType>('/api/auth/register', form);
+
+        if (data.status === 201) {
+            login(data.token);
+            navigate('/dash');
         } else {
             setMessages(prev => [
                 ...prev,
-                { id: prev.length + 1, ok: false, description: data.message },
+                { id: prev.length + 1, ok: false, description: data.detail },
             ]);
         }
     }

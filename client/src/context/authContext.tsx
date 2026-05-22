@@ -1,26 +1,27 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { AuthenticatedContextType } from '../interfaces/Objects';
-import Loading from '../components/loading';
 
 const AuthenticatedContext = createContext<AuthenticatedContextType>({
     isAuthenticated: false,
-    setAuthenticated: () => {},
+    login: () => {},
+    logout: () => {},
 });
 
 export function AuthenticatedProvider({ children }: { children: ReactNode }) {
     const [isAuthenticated, setAuthenticated] = useState(false);
-    const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch('/api/auth/check', { credentials: 'include' })
-            .then(res => setAuthenticated(res.status === 200))
-            .catch(() => setAuthenticated(false))
-            .finally(() => setLoading(false));
-    });
+    const login = (token: string) => {
+        localStorage.setItem('accessToken', token);
+        setAuthenticated(true);
+    };
 
-    if (isLoading) return <Loading />;
+    const logout = () => {
+        localStorage.removeItem('accessToken');
+        setAuthenticated(false);
+    };
+
     return (
-        <AuthenticatedContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+        <AuthenticatedContext.Provider value={{ isAuthenticated, login, logout }}>
             {children}
         </AuthenticatedContext.Provider>
     );

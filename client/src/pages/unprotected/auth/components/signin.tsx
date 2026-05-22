@@ -12,24 +12,28 @@ export default function SignIn({ changeForm }: FormProps) {
         password: '',
     });
     const [showPassword, setShow] = useState(false);
-    const { setAuthenticated } = useAuthenticated();
+    const { login } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
 
-        const data = await POST<{ ok: boolean; redirect: string; message: string }>(
-            '/api/auth/login',
-            form,
-        );
-        if (data.ok) {
-            setAuthenticated(true);
-            navigate(data.redirect);
+        type responseType = {
+            status: number;
+            token: string;
+            token_type: string;
+            detail: string;
+        };
+        const data = await POST<responseType>('/api/auth/login', form);
+
+        if (data.status === 200) {
+            login(data.token);
+            navigate('/dash');
         } else {
             setMessages(prev => [
                 ...prev,
-                { id: prev.length + 1, ok: false, description: data.message },
+                { id: prev.length + 1, ok: false, description: data.detail },
             ]);
         }
     }

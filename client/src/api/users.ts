@@ -1,20 +1,24 @@
 import type { User } from '../interfaces/Objects';
-import getCSRF from './csrf';
 
-export async function GET(url: string): Promise<User> {
-    const response = await fetch(url, { credentials: 'include' });
+export async function GET(
+    url: string,
+    headers: HeadersInit | undefined = undefined,
+): Promise<User> {
+    console.log(headers);
+    const response = await fetch(url, { method: 'GET', credentials: 'include', headers: headers });
     const data = await response.json();
+    data.status = response.status;
     return data;
 }
 
 export async function POST<T>(url: string, data: unknown): Promise<T> {
-    const token = await getCSRF();
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': token },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
     });
     const result = await response.json();
+    result.status = response.status;
     return result;
 }

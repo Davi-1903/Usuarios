@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from jwt import encode
+from jwt import encode, decode
 from os import getenv
 
 
@@ -20,3 +20,11 @@ def create_access_token(data: dict) -> str:
     data.update({'exp': expire})
     token = encode(data, get_env('SECRET_KEY'), algorithm=get_env('ALGORITHM'))
     return token
+
+
+def decode_access_token(token: str) -> int:
+    payload = decode(token, get_env('SECRET_KEY'), algorithms=[get_env('ALGORITHM')])
+    user_id = payload.get('sub')
+    if user_id is None:
+        raise ValueError('Token inválido: campo "sub" não encontrado')
+    return int(user_id)
