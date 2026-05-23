@@ -1,12 +1,22 @@
-FROM python:3.11-slim
+# =========================== UV ===========================
+FROM ghcr.io/astral-sh/uv:latest AS builder
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
 
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+
+# ========================= PYTHON =========================
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY --from=builder /app/.venv /app/.venv
+
+ENV PATH="/app/.venv/bin:$PATH"
+
 COPY . .
 
-EXPOSE 5000
-CMD [ "gunicorn", "-b", "0.0.0.0:5000", "app:app" ]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
