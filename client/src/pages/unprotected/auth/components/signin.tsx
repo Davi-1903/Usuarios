@@ -23,12 +23,13 @@ export default function SignIn({ changeForm }: FormProps) {
             status: number;
             token: string;
             token_type: string;
+            refresh_token: string;
             detail: string;
         };
         const data = await POST<responseType>('/api/auth/login', form);
 
         if (data.status === 200) {
-            login(data.token);
+            login(data.token, data.refresh_token);
             navigate('/dash');
         } else {
             setMessages(prev => [

@@ -7,10 +7,13 @@ export default function Dash() {
     const [name, setName] = useState<string | null>(null);
 
     useEffect(() => {
-        GET('/api/user', {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            'Content-Type': 'application/json',
-        }).then(data => setName(data.name));
+        GET<{ name: string }>('/api/user/').then(data => {
+            if (data.status === 200) {
+                setName(data.name);
+            } else {
+                console.error('Erro ao carregar usuário:', data);
+            }
+        });
     }, []);
 
     return (

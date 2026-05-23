@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { AuthenticatedContextType } from '../interfaces/Objects';
 
 const AuthenticatedContext = createContext<AuthenticatedContextType>({
@@ -10,15 +10,25 @@ const AuthenticatedContext = createContext<AuthenticatedContextType>({
 export function AuthenticatedProvider({ children }: { children: ReactNode }) {
     const [isAuthenticated, setAuthenticated] = useState(false);
 
-    const login = (token: string) => {
-        localStorage.setItem('accessToken', token);
+    const login = (token: string, refreshToken: string) => {
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         setAuthenticated(true);
     };
 
     const logout = () => {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         setAuthenticated(false);
     };
+
+    useEffect(() => {
+        const checkAuth = () => {
+            setAuthenticated(!!localStorage.getItem('access_token'));
+        };
+
+        checkAuth();
+    }, []);
 
     return (
         <AuthenticatedContext.Provider value={{ isAuthenticated, login, logout }}>

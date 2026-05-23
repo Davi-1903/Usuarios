@@ -1,3 +1,4 @@
+from json import detect_encoding
 from typing import Annotated
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
@@ -7,7 +8,7 @@ from pydantic import EmailStr
 from sqlmodel import SQLModel, Session, select
 from database import get_session
 from models.user import User
-from utils import create_access_token
+from utils import create_access_token, create_refresh_token, decode_refresh_token
 
 
 router = APIRouter(prefix='/api/auth', tags=['Auth'])
@@ -17,7 +18,12 @@ ph = PasswordHasher()
 
 class Token(SQLModel):
     token: str
+    refresh_token: str
     token_type: str
+
+
+class RefreshToken(SQLModel):
+    refresh_token: str
 
 
 class UserRegister(SQLModel):
@@ -56,6 +62,7 @@ def register(session: SessionDep, user_input: UserRegister):
         status_code=201,
         content={
             'token': create_access_token({'sub': user.id}),
+            'refresh_token': create_refresh_token({'sub': user.id}),
             'token_type': 'bearer'
         }
     )
@@ -76,6 +83,19 @@ def login(session: SessionDep, user_input: UserLogin):
         status_code=200,
         content={
             'token': create_access_token({'sub': user.id}),
+            'refresh_token': create_refresh_token({'sub': user.id}),
+            'token_type': 'bearer'
+        }
+    )
+
+
+@router.post('/refresh')
+def refresh(body: RefreshToken):
+    user_id = decode_refresh_token(body.refresh_token)
+    return JSONResponse(
+        status_code=200,
+        content={
+            'token': create_access_token({'sub': int(user_id)}),
             'token_type': 'bearer'
         }
     )

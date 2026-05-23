@@ -24,12 +24,13 @@ export default function SignUp({ changeForm }: FormProps) {
             status: number;
             token: string;
             token_type: string;
+            refresh_token: string;
             detail: string;
         };
         const data = await POST<returnType>('/api/auth/register', form);
 
         if (data.status === 201) {
-            login(data.token);
+            login(data.token, data.refresh_token);
             navigate('/dash');
         } else {
             setMessages(prev => [

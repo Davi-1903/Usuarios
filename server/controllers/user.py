@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlmodel import Session
 from database import get_session
 from models.user import User
@@ -13,11 +13,13 @@ SessionDep = Annotated[Session, Depends(get_session)]
 security = HTTPBearer()
 
 
-@router.get('/', response_model=User)
+@router.get('/')
 def get_user(session: SessionDep, credentials: HTTPAuthorizationCredentials = Depends(security)):
-    token = credentials.credentials
-    user_id = decode_access_token(token)
-    print(user_id)
+    try:
+        token = credentials.credentials
+        user_id = decode_access_token(token)
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))
 
     user = session.get(User, user_id)
     if not user:

@@ -19,6 +19,6 @@ export interface MessagesContextType {
 
 export interface AuthenticatedContextType {
     isAuthenticated: boolean;
-    login: (token: string) => void;
+    login: (token: string, refreshToken: string) => void;
     logout: () => void;
 }
