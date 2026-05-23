@@ -5,6 +5,10 @@ import { useAuthenticated } from '../../context/authContext';
 export default function Sidebar() {
     const { logout } = useAuthenticated();
 
+    function handleLogout() {
+        if (confirm('Deseja sair do sistema?')) logout();
+    }
+
     return (
         <nav className='bg-header shadow-basic row-span-2 flex flex-col gap-8 p-4'>
             <div className='aspect-square w-full rounded-full bg-black'></div>
@@ -17,7 +21,7 @@ export default function Sidebar() {
                     </Link>
                 </li>
                 <li className='link'>
-                    <button onClick={logout}>
+                    <button onClick={handleLogout}>
                         <IconLogout />
                     </button>
                 </li>

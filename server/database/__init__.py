@@ -1,10 +1,10 @@
 from typing import Any, Generator
-from sqlmodel import SQLModel, create_engine, Session
-from utils import get_env
+from sqlmodel import SQLModel, Session
+from utils import get_engine, create_url
 
 
-DATABASE_URI = get_env('DATABASE_URI')
-engine = create_engine(DATABASE_URI, connect_args={'check_same_thread': False})
+DATABASE_URI = create_url()
+engine = get_engine(url=DATABASE_URI, echo=False)
 
 
 def create_database():
