@@ -1,4 +1,3 @@
-from json import detect_encoding
 from typing import Annotated
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
