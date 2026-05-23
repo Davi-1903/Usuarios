@@ -20,12 +20,13 @@ export default function Dash() {
         <ProtectedRoute isPrivate={true}>
             <Helmet>
                 <title>Usuários | Dash</title>
-                <meta name='description' content='Home do sistema de cadastro de usuários' />
+                <meta
+                    name='description'
+                    content='Home do sistema de cadastro de usuários'
+                />
             </Helmet>
             <>
-                <h1 className='font-primary text-3xl font-bold text-black lg:text-7xl'>
-                    Welcome, {name}
-                </h1>
+                <h1 className='font-primary text-3xl font-bold text-black lg:text-7xl'>Welcome, {name}</h1>
             </>
         </ProtectedRoute>
     );

@@ -9,11 +9,7 @@ const MessagesContext = createContext<MessagesContextType>({
 export function MessagesProvider({ children }: { children: ReactNode }) {
     const [messages, setMessages] = useState<Message[]>([]);
 
-    return (
-        <MessagesContext.Provider value={{ messages, setMessages }}>
-            {children}
-        </MessagesContext.Provider>
-    );
+    return <MessagesContext.Provider value={{ messages, setMessages }}>{children}</MessagesContext.Provider>;
 }
 
 export function useMessages() {

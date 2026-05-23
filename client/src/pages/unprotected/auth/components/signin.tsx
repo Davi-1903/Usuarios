@@ -32,10 +32,7 @@ export default function SignIn({ changeForm }: FormProps) {
             login(data.token, data.refresh_token);
             navigate('/dash');
         } else {
-            setMessages(prev => [
-                ...prev,
-                { id: prev.length + 1, ok: false, description: data.detail },
-            ]);
+            setMessages(prev => [...prev, { id: prev.length + 1, ok: false, description: data.detail }]);
         }
     }
 
@@ -45,10 +42,16 @@ export default function SignIn({ changeForm }: FormProps) {
     }
 
     return (
-        <form className='form' onSubmit={handleSubmit}>
+        <form
+            className='form'
+            onSubmit={handleSubmit}
+        >
             <h2 className='font-primary text-5xl font-bold text-black'>SignIn</h2>
             <div>
-                <label htmlFor='email-signin' className='font-secundary block text-lg text-black'>
+                <label
+                    htmlFor='email-signin'
+                    className='block font-secundary text-lg text-black'
+                >
                     Email
                 </label>
                 <div className='relative'>
@@ -59,7 +62,7 @@ export default function SignIn({ changeForm }: FormProps) {
                         required
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
+                        className='h-12 w-full bg-white pr-[15%] pl-4 font-secundary text-lg text-black outline-0'
                     />
                     <label
                         htmlFor='email-signin'
@@ -72,7 +75,7 @@ export default function SignIn({ changeForm }: FormProps) {
             <div>
                 <label
                     htmlFor='password-signin'
-                    className='font-secundary block text-lg text-black'
+                    className='block font-secundary text-lg text-black'
                 >
                     Password
                 </label>
@@ -84,7 +87,7 @@ export default function SignIn({ changeForm }: FormProps) {
                         required
                         value={form.password}
                         onChange={e => setForm({ ...form, password: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
+                        className='h-12 w-full bg-white pr-[15%] pl-4 font-secundary text-lg text-black outline-0'
                     />
                     <button
                         type='button'
@@ -101,13 +104,16 @@ export default function SignIn({ changeForm }: FormProps) {
             </div>
             <button
                 type='submit'
-                className='font-primary h-12 w-full cursor-pointer bg-black text-xl text-white'
+                className='h-12 w-full cursor-pointer bg-black font-primary text-xl text-white'
             >
                 SignIn
             </button>
             <p className='text-2sm font-secundary text-black'>
                 Don't have an account?{' '}
-                <span onClick={toSignup} className='cursor-pointer text-black hover:underline'>
+                <span
+                    onClick={toSignup}
+                    className='cursor-pointer text-black hover:underline'
+                >
                     To SignUp
                 </span>
             </p>

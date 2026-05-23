@@ -13,7 +13,12 @@ export default function App() {
         <div className='wrapper'>
             <article className='pointer-events-none fixed top-4 right-4 z-1 flex w-sm flex-col gap-4'>
                 {messages.map(message => {
-                    return <Message key={message.id} {...message} />;
+                    return (
+                        <Message
+                            key={message.id}
+                            {...message}
+                        />
+                    );
                 })}
             </article>
             {isAuthenticated ? <ProtectedLayout /> : <UnprotectedLayout />}

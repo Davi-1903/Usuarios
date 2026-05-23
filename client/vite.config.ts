@@ -16,13 +16,7 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    vendor: [
-                        'react',
-                        'react-dom',
-                        'react-helmet-async',
-                        'react-router-dom',
-                        'tailwindcss',
-                    ],
+                    vendor: ['react', 'react-dom', 'react-helmet-async', 'react-router-dom', 'tailwindcss'],
                     ui: ['@tabler/icons-react'],
                 },
             },

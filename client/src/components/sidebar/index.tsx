@@ -10,7 +10,7 @@ export default function Sidebar() {
     }
 
     return (
-        <nav className='bg-header shadow-basic row-span-2 flex flex-col gap-8 p-4'>
+        <nav className='row-span-2 flex flex-col gap-8 bg-header p-4 shadow-basic'>
             <div className='aspect-square w-full rounded-full bg-black'></div>
             <ul className='flex flex-col gap-4'>
                 <li className='link'>

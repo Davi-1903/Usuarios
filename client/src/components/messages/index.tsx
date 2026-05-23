@@ -24,16 +24,22 @@ export default function Message({ id, description, ok }: MessageType) {
             onAnimationEnd={() => onHandleAnimationEnd(id)}
         >
             <div className='flex-1 p-4'>
-                <p className='font-secundary text-md text-wrap text-white'>{description}</p>
+                <p className='text-md font-secundary text-wrap text-white'>{description}</p>
             </div>
             <div>
-                <button className='cursor-pointer p-1' onClick={() => setDeleting(true)}>
-                    <IconX size={24} className='stroke-white' />
+                <button
+                    className='cursor-pointer p-1'
+                    onClick={() => setDeleting(true)}
+                >
+                    <IconX
+                        size={24}
+                        className='stroke-white'
+                    />
                 </button>
             </div>
             <div className='col-span-2 h-2 w-full'>
                 <div
-                    className='animate-progress h-full w-0 bg-white'
+                    className='h-full w-0 animate-progress bg-white'
                     onAnimationEnd={() => setDeleting(true)}
                 ></div>
             </div>

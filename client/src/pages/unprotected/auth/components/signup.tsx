@@ -33,10 +33,7 @@ export default function SignUp({ changeForm }: FormProps) {
             login(data.token, data.refresh_token);
             navigate('/dash');
         } else {
-            setMessages(prev => [
-                ...prev,
-                { id: prev.length + 1, ok: false, description: data.detail },
-            ]);
+            setMessages(prev => [...prev, { id: prev.length + 1, ok: false, description: data.detail }]);
         }
     }
 
@@ -50,10 +47,16 @@ export default function SignUp({ changeForm }: FormProps) {
     }
 
     return (
-        <form className='form -translate-y-1/2 rotate-y-180' onSubmit={handleSubmit}>
+        <form
+            className='form -translate-y-1/2 rotate-y-180'
+            onSubmit={handleSubmit}
+        >
             <h2 className='font-primary text-5xl font-bold text-black'>SignUp</h2>
             <div>
-                <label htmlFor='name' className='font-secundary block text-lg text-black'>
+                <label
+                    htmlFor='name'
+                    className='block font-secundary text-lg text-black'
+                >
                     Name
                 </label>
                 <div className='relative'>
@@ -64,7 +67,7 @@ export default function SignUp({ changeForm }: FormProps) {
                         required
                         value={form.name}
                         onChange={e => setForm({ ...form, name: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
+                        className='h-12 w-full bg-white pr-[15%] pl-4 font-secundary text-lg text-black outline-0'
                     />
                     <label
                         htmlFor='name'
@@ -75,7 +78,10 @@ export default function SignUp({ changeForm }: FormProps) {
                 </div>
             </div>
             <div>
-                <label htmlFor='email' className='font-secundary block text-lg text-black'>
+                <label
+                    htmlFor='email'
+                    className='block font-secundary text-lg text-black'
+                >
                     Email
                 </label>
                 <div className='relative'>
@@ -86,7 +92,7 @@ export default function SignUp({ changeForm }: FormProps) {
                         required
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
+                        className='h-12 w-full bg-white pr-[15%] pl-4 font-secundary text-lg text-black outline-0'
                     />
                     <label
                         htmlFor='email'
@@ -97,7 +103,10 @@ export default function SignUp({ changeForm }: FormProps) {
                 </div>
             </div>
             <div>
-                <label htmlFor='password' className='font-secundary block text-lg text-black'>
+                <label
+                    htmlFor='password'
+                    className='block font-secundary text-lg text-black'
+                >
                     Password
                 </label>
                 <div className='relative'>
@@ -108,7 +117,7 @@ export default function SignUp({ changeForm }: FormProps) {
                         required
                         value={form.password}
                         onChange={e => setForm({ ...form, password: e.target.value })}
-                        className='font-secundary h-12 w-full bg-white pr-[15%] pl-4 text-lg text-black outline-0'
+                        className='h-12 w-full bg-white pr-[15%] pl-4 font-secundary text-lg text-black outline-0'
                     />
                     <button
                         type='button'
@@ -125,13 +134,16 @@ export default function SignUp({ changeForm }: FormProps) {
             </div>
             <button
                 type='submit'
-                className='font-primary h-12 w-full cursor-pointer bg-black text-xl text-white'
+                className='h-12 w-full cursor-pointer bg-black font-primary text-xl text-white'
             >
                 SignUp
             </button>
             <p className='text-2sm font-secundary text-black'>
                 Do you already have an account?{' '}
-                <span onClick={toSignin} className='cursor-pointer text-black hover:underline'>
+                <span
+                    onClick={toSignin}
+                    className='cursor-pointer text-black hover:underline'
+                >
                     To SignIn
                 </span>
             </p>

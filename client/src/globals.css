@@ -3,7 +3,7 @@
 
 :root {
     --height-header: 100px;
-    --base-color: #EEF;
+    --base-color: #eef;
     --text-color: #303040;
     --font-primary: 'Chivo Mono';
     --font-secundary: 'Roboto';
@@ -31,7 +31,7 @@
     --color-green: hsl(120 25% 50%);
     --color-red: hsl(0 50% 50%);
     --color-header: hsl(from var(--base-color) h s calc(l + 10));
-    --shadow-basic: 0 .5rem 1rem hsl(from var(--text-color) h s l / 0.1);
+    --shadow-basic: 0 0.5rem 1rem hsl(from var(--text-color) h s l / 0.1);
     --font-primary: var(--font-primary);
     --font-secundary: var(--font-secundary);
 }
@@ -46,7 +46,7 @@
             background-color: var(--base-color);
         }
 
-        &>svg {
+        & > svg {
             width: 32px;
             height: 32px;
             stroke: var(--text-color);
@@ -83,11 +83,11 @@
 
 @keyframes animation-progress {
     from {
-        width: 0
+        width: 0;
     }
 
     to {
-        width: 100%
+        width: 100%;
     }
 }
 

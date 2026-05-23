@@ -15,10 +15,7 @@ export async function tryRefresh(): Promise<string | undefined> {
     return data.token;
 }
 
-export async function GET<T = unknown>(
-    url: string,
-    headers: HeadersInit = {},
-): Promise<T & { status: number }> {
+export async function GET<T = unknown>(url: string, headers: HeadersInit = {}): Promise<T & { status: number }> {
     const token = localStorage.getItem('access_token');
     let response = await fetch(url, {
         method: 'GET',
