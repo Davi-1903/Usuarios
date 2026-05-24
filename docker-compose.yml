@@ -1,5 +1,5 @@
 services:
-    nginx:
+    client:
         build: ./client
         ports:
             - '3000:80'
@@ -21,12 +21,12 @@ services:
             - DB_PASSWORD=${DB_PASSWORD}
             - DB_DRIVER=${DB_DRIVER}
         depends_on:
-            - mysql
+            - database
 
-    mysql:
+    database:
         image: mysql:8
         environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_DATABASE: db_users
         volumes:
             - db_data:/var/lib/mysql

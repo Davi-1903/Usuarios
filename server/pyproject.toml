@@ -1,8 +1,7 @@
 [project]
 name = "server"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
+description = "Backend do sistema Usuários"
 requires-python = ">=3.13"
 dependencies = [
     "argon2-cffi>=25.1.0",
