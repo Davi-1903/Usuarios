@@ -1,18 +1,18 @@
 from typing import Annotated
-from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import EmailStr
 from sqlmodel import SQLModel, Session, select
 from database import get_session
 from models.user import User
-from utils import create_access_token, create_refresh_token, decode_refresh_token
+from utils import (
+    create_access_token, create_refresh_token,
+    decode_refresh_token, create_hash, verify_hash
+)
 
 
 router = APIRouter(prefix='/api/auth', tags=['Auth'])
 SessionDep = Annotated[Session, Depends(get_session)]
-ph = PasswordHasher()
 
 
 class Token(SQLModel):
@@ -42,13 +42,13 @@ class UserLogin(SQLModel):
 def register(session: SessionDep, user_input: UserRegister):
     user = session.exec(select(User).where(User.email == user_input.email)).first()
     if user:
-        raise HTTPException(status_code=400, detail='Email já cadastrado')
+        raise HTTPException(status_code=400, detail='Email inválido')
 
     try:
         user = User(
             name=user_input.name,
             email=user_input.email,
-            password=ph.hash(user_input.password)
+            password=create_hash(user_input.password)
         )
         session.add(user)
         session.commit()
@@ -70,13 +70,8 @@ def register(session: SessionDep, user_input: UserRegister):
 @router.post('/login', response_model=Token)
 def login(session: SessionDep, user_input: UserLogin):
     user = session.exec(select(User).where(User.email == user_input.email)).first()
-    if not user:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
-
-    try:
-        ph.verify(user.password, user_input.password)
-    except VerifyMismatchError:
-        raise HTTPException(status_code=401, detail='Senha inválida')
+    if not user or not verify_hash(user.password, user_input.password):
+        raise HTTPException(status_code=404, detail='Credenciais inválidas')
 
     return JSONResponse(
         status_code=200,
