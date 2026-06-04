@@ -1,5 +1,9 @@
+from dotenv import load_dotenv
 from .database import *
 from .auth import *
+
+
+load_dotenv()
 
 
 __all__ = [

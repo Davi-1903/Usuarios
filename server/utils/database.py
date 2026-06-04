@@ -1,14 +1,11 @@
 from os import getenv
 from time import sleep
-from dotenv import load_dotenv
 from sqlalchemy import Engine
 from sqlalchemy.exc import OperationalError
 from sqlmodel import create_engine
 
 
-def get_env(key: str, default: str | None = None) -> str:
-    load_dotenv()
-    
+def get_env(key: str, default: str | None = None) -> str:    
     value = getenv(key)
     if value is not None and value != '':
         return value
