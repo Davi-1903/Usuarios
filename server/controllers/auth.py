@@ -1,8 +1,8 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from pydantic import EmailStr
-from sqlmodel import SQLModel, Session, select
+from pydantic import BaseModel, EmailStr
+from sqlmodel import Session, select
 from database import get_session
 from models.user import User
 from utils import (
@@ -15,23 +15,23 @@ router = APIRouter(prefix='/api/auth', tags=['Auth'])
 SessionDep = Annotated[Session, Depends(get_session)]
 
 
-class Token(SQLModel):
+class Token(BaseModel):
     token: str
     refresh_token: str
     token_type: str
 
 
-class RefreshToken(SQLModel):
+class RefreshToken(BaseModel):
     refresh_token: str
 
 
-class UserRegister(SQLModel):
+class UserRegister(BaseModel):
     name: str
     email: EmailStr
     password: str
 
 
-class UserLogin(SQLModel):
+class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
@@ -40,9 +40,9 @@ class UserLogin(SQLModel):
 
 @router.post('/register', response_model=Token)
 def register(session: SessionDep, user_input: UserRegister):
-    user = session.exec(select(User).where(User.email == user_input.email)).first()
+    user = session.scalar(select(User).where(User.email == user_input.email))
     if user:
-        raise HTTPException(status_code=400, detail='Email inválido')
+        raise HTTPException(status_code=400, detail='Credenciais inválidas')
 
     try:
         user = User(
@@ -69,7 +69,7 @@ def register(session: SessionDep, user_input: UserRegister):
 
 @router.post('/login', response_model=Token)
 def login(session: SessionDep, user_input: UserLogin):
-    user = session.exec(select(User).where(User.email == user_input.email)).first()
+    user = session.scalar(select(User).where(User.email == user_input.email))
     if not user or not verify_hash(user.password, user_input.password):
         raise HTTPException(status_code=404, detail='Credenciais inválidas')
 

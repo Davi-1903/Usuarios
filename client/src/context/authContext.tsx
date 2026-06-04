@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { AuthenticatedContextType } from '../interfaces/Objects';
+import { GET } from '../api/users';
 
 const AuthenticatedContext = createContext<AuthenticatedContextType>({
     isAuthenticated: false,
@@ -24,7 +25,9 @@ export function AuthenticatedProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const checkAuth = () => {
-            setAuthenticated(!!localStorage.getItem('access_token'));
+            GET('/api/user')
+                .then(res => setAuthenticated(res.status === 200))
+                .catch(() => setAuthenticated(false));
         };
 
         checkAuth();

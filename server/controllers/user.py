@@ -30,8 +30,10 @@ def get_user(user: User = Depends(get_current_user)):
     return JSONResponse(
         status_code=200,
         content={
-            'id': user.id,
-            'name': user.name,
-            'email': user.email
+            'user': {
+                'id': user.id,
+                'name': user.name,
+                'email': user.email
+            }
         }
     )

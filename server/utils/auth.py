@@ -43,7 +43,7 @@ def decode_access_token(token: str) -> int:
 
     user_id = payload.get('sub')
     if user_id is None:
-        raise ValueError('Token inválido: campo "sub" não encontrado')
+        raise HTTPException(status_code=401, detail='Token inválido: campo "sub" não encontrado')
     return int(user_id)
 
 
