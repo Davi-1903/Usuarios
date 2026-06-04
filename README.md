@@ -24,13 +24,8 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
 
         ```powershell
         uv sync
-
-        # Ative o ambiente virtual
-        # --------------- Windows ---------------
-        .\.venv\Scripts\activate
-
-        # ------------- Linux/MacOS -------------
-        source .venv/bin/activate
+        # ----------- ou -----------
+        pip install -r requirements.txt
         ```
 
 3. **Crie um arquivo `.env` na raiz do projeto e adicione**
@@ -43,7 +38,6 @@ Para executar essa brincadeira é um pouco complicado, mas vamos lá. Primeiro, 
     ALGORITHM=HS256
 
     # ============================ BANCO DE DADOS ============================
-    DB_DRIVER=mysql+pymysql
     DB_USER=root
     DB_PASSWORD=<SENHA-PARA-O-BANCO-DE-DADOS>
     DB_HOST=localhost
@@ -79,19 +73,18 @@ Se tudo ocorrer bem, a aplicação está rodando em [`http://localhost:3000`](ht
 2. **Crie um arquivo `.env` na raiz do projeto e adicione**
 
     ```env
-     # ============================= AUTENTICAÇÃO =============================
-     SECRET_KEY=<SUA-CHAVE-SUPER-SECRETA>
-     REFRESH_TOKEN_EXPIRE_DAYS=<DIAS>
-     TOKEN_EXPIRE_MINUTES=<MINUTOS>
-     ALGORITHM=HS256
+    # ============================= AUTENTICAÇÃO =============================
+    SECRET_KEY=<SUA-CHAVE-SUPER-SECRETA>
+    REFRESH_TOKEN_EXPIRE_DAYS=<DIAS>
+    TOKEN_EXPIRE_MINUTES=<MINUTOS>
+    ALGORITHM=HS256
 
-     # ============================ BANCO DE DADOS ============================
-     DB_DRIVER=mysql+pymysql
-     DB_USER=root
-     DB_PASSWORD=<SENHA-PARA-O-BANCO-DE-DADOS>
-     DB_HOST=database
-     DB_PORT=3306
-     DB_NAME=db_users
+    # ============================ BANCO DE DADOS ============================
+    DB_USER=root
+    DB_PASSWORD=<SENHA-PARA-O-BANCO-DE-DADOS>
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_users
     ```
 
 3. **Crie e inicialize o container**

@@ -1,18 +1,20 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
+from pwdlib import PasswordHash
 from pydantic import BaseModel, EmailStr
 from sqlmodel import Session, select
 from database import get_session
 from models.user import User
 from utils import (
     create_access_token, create_refresh_token,
-    decode_refresh_token, create_hash, verify_hash
+    decode_refresh_token
 )
 
 
 router = APIRouter(prefix='/api/auth', tags=['Auth'])
 SessionDep = Annotated[Session, Depends(get_session)]
+ph = PasswordHash.recommended()
 
 
 class Token(BaseModel):
@@ -48,7 +50,7 @@ def register(session: SessionDep, user_input: UserRegister):
         user = User(
             name=user_input.name,
             email=user_input.email,
-            password=create_hash(user_input.password)
+            password=ph.hash(user_input.password)
         )
         session.add(user)
         session.commit()
@@ -70,7 +72,7 @@ def register(session: SessionDep, user_input: UserRegister):
 @router.post('/login', response_model=Token)
 def login(session: SessionDep, user_input: UserLogin):
     user = session.scalar(select(User).where(User.email == user_input.email))
-    if not user or not verify_hash(user.password, user_input.password):
+    if not user or not ph.verify(user_input.password, user.password):
         raise HTTPException(status_code=404, detail='Credenciais inválidas')
 
     return JSONResponse(

@@ -1,23 +1,7 @@
 from fastapi import HTTPException
-from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
 from datetime import datetime, timedelta, timezone
 from jwt import ExpiredSignatureError, InvalidTokenError, decode, encode
 from utils.database import get_env
-
-
-ph = PasswordHasher()
-
-
-def create_hash(password: str) -> str:
-    return ph.hash(password)
-
-
-def verify_hash(hash: str, password: str) -> bool:
-    try:
-        return ph.verify(hash, password)
-    except VerifyMismatchError:
-        return False
 
 
 def create_access_token(data: dict) -> str:

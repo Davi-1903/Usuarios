@@ -34,8 +34,7 @@ def create_url() -> str:
     name = get_env('DB_NAME')
     user = get_env('DB_USER')
     password = get_env('DB_PASSWORD', '<empty>')
-    driver = get_env('DB_DRIVER')
 
     if password == '<empty>':
-        return f'{driver}://{user}@{host}:{port}/{name}'
-    return f'{driver}://{user}:{password}@{host}:{port}/{name}'
+        return f'mysql+pymysql://{user}@{host}:{port}/{name}'
+    return f'mysql+pymysql://{user}:{password}@{host}:{port}/{name}'
