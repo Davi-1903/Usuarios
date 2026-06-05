@@ -1,6 +1,5 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import Session
 from database import get_session
@@ -25,15 +24,6 @@ def get_current_user(session: SessionDep, token: str = Depends(oauth2_scheme)) -
     return user
 
 
-@router.get('/')
+@router.get('/', response_model=User)
 def get_user(user: User = Depends(get_current_user)):
-    return JSONResponse(
-        status_code=200,
-        content={
-            'user': {
-                'id': user.id,
-                'name': user.name,
-                'email': user.email
-            }
-        }
-    )
+    return user

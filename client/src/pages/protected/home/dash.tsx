@@ -8,9 +8,9 @@ export default function Dash() {
     const [name, setName] = useState<string | null>(null);
 
     useEffect(() => {
-        GET<{ user: User }>('/api/user/').then(data => {
+        GET<{ name: string }>('/api/user/').then(data => {
             if (data.status === 200) {
-                setName(data.user.name);
+                setName(data.name);
             } else {
                 console.error('Erro ao carregar usuário:', data);
             }
