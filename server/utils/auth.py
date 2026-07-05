@@ -47,7 +47,7 @@ def decode_refresh_token(token: str) -> int:
         raise HTTPException(status_code=401, detail='Refresh token expirado')
     except InvalidTokenError:
         raise HTTPException(status_code=401, detail='Refresh token inválido')
-    
+
     if payload.get('type') != 'refresh':
         raise HTTPException(status_code=401, detail='Token inválido')
 

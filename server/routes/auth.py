@@ -6,10 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, select
 from database import get_session
 from models.user import User
-from utils import (
-    create_access_token, create_refresh_token,
-    decode_refresh_token
-)
+from utils import create_access_token, create_refresh_token, decode_refresh_token
 
 
 router = APIRouter(prefix='/api/auth', tags=['Auth'])
@@ -40,18 +37,15 @@ class UserLogin(BaseModel):
 
 # ========================================== ENDPOINTS ==========================================
 
+
 @router.post('/register', response_model=Token)
 def register(session: SessionDep, user_input: UserRegister):
     try:
-        user = User(
-            name=user_input.name,
-            email=user_input.email,
-            password=ph.hash(user_input.password)
-        )
+        user = User(name=user_input.name, email=user_input.email, password=ph.hash(user_input.password))
         session.add(user)
         session.commit()
         session.refresh(user)
-    
+
     except IntegrityError:
         session.rollback()
         raise HTTPException(status_code=409, detail='Violação na integridade dos dados')
@@ -59,7 +53,7 @@ def register(session: SessionDep, user_input: UserRegister):
     return {
         'token': create_access_token({'sub': user.id}),
         'refresh_token': create_refresh_token({'sub': user.id}),
-        'token_type': 'bearer'
+        'token_type': 'bearer',
     }
 
 
@@ -72,14 +66,11 @@ def login(session: SessionDep, user_input: UserLogin):
     return {
         'token': create_access_token({'sub': user.id}),
         'refresh_token': create_refresh_token({'sub': user.id}),
-        'token_type': 'bearer'
+        'token_type': 'bearer',
     }
 
 
 @router.post('/refresh')
 def refresh(body: RefreshToken):
     user_id = decode_refresh_token(body.refresh_token)
-    return {
-        'token': create_access_token({'sub': int(user_id)}),
-        'token_type': 'bearer'
-    }
+    return {'token': create_access_token({'sub': int(user_id)}), 'token_type': 'bearer'}
