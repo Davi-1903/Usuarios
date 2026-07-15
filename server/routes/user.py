@@ -15,7 +15,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 def get_current_user(session: SessionDep, token: str = Depends(oauth2_scheme)) -> User:
     try:
         user_id = decode_access_token(token)
-    except:
+    except Exception:
         raise HTTPException(status_code=401, detail='Token inválido')
 
     user = session.get(User, user_id)

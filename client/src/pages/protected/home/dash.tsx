@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import type { User } from '../../../interfaces/Objects';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { GET } from '../../../api/users';
 

@@ -9,7 +9,7 @@ const AuthenticatedContext = createContext<AuthenticatedContextType>({
 });
 
 export function AuthenticatedProvider({ children }: { children: ReactNode }) {
-    const [isAuthenticated, setAuthenticated] = useState(false);
+    const [isAuthenticated, setAuthenticated] = useState(() => Boolean(localStorage.getItem('access_token')));
 
     const login = (token: string, refreshToken: string) => {
         localStorage.setItem('access_token', token);
@@ -25,7 +25,12 @@ export function AuthenticatedProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const checkAuth = () => {
-            GET('/api/user')
+            if (!localStorage.getItem('access_token')) {
+                setAuthenticated(false);
+                return;
+            }
+
+            GET('/api/user/')
                 .then(res => setAuthenticated(res.status === 200))
                 .catch(() => setAuthenticated(false));
         };

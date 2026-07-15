@@ -38,7 +38,7 @@ class UserLogin(BaseModel):
 # ========================================== ENDPOINTS ==========================================
 
 
-@router.post('/register', response_model=Token)
+@router.post('/register', response_model=Token, status_code=201)
 def register(session: SessionDep, user_input: UserRegister):
     try:
         user = User(name=user_input.name, email=user_input.email, password=ph.hash(user_input.password))
