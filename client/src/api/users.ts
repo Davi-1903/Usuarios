@@ -1,26 +1,31 @@
-export async function tryRefresh(): Promise<string | undefined> {
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (!refreshToken) return;
+let accessToken: string | null = null;
 
+export function setAccessToken(token: string | null) {
+    accessToken = token;
+}
+
+export function getAccessToken() {
+    return accessToken;
+}
+
+export async function tryRefresh(): Promise<string | undefined> {
     const response = await fetch('/api/auth/refresh', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ refresh_token: refreshToken }),
+        credentials: 'include', // envia o cookie HttpOnly automaticamente
     });
 
     if (!response.ok) return;
 
     const data = await response.json();
-    localStorage.setItem('access_token', data.token);
+    setAccessToken(data.token);
     return data.token;
 }
 
 export async function GET<T = unknown>(url: string, headers: HeadersInit = {}): Promise<T & { status: number }> {
-    const token = localStorage.getItem('access_token');
     let response = await fetch(url, {
         method: 'GET',
         credentials: 'include',
-        headers: { ...headers, Authorization: `Bearer ${token}` },
+        headers: { ...headers, Authorization: `Bearer ${accessToken}` },
     });
 
     if (response.status === 401) {
@@ -43,7 +48,7 @@ export async function POST<T>(url: string, data: unknown, headers: HeadersInit =
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'include',
-        headers: { ...headers, 'Content-Type': 'application/json' },
+        headers: { ...headers, 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
         body: JSON.stringify(data),
     });
     const result = await response.json();

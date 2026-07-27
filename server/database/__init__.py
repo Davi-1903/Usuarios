@@ -3,9 +3,7 @@ from sqlmodel import SQLModel, Session
 from utils import get_engine, create_url
 
 
-DATABASE_URI = create_url()
-DATABASE_URI = 'sqlite:///app.db'
-engine = get_engine(url=DATABASE_URI, echo=False)
+engine = get_engine(url=create_url(), echo=False)
 
 
 def create_database():

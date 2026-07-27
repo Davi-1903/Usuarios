@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { AuthenticatedContextType } from '../interfaces/Objects';
-import { GET } from '../api/users';
+import { setAccessToken, tryRefresh } from '../api/users';
 
 const AuthenticatedContext = createContext<AuthenticatedContextType>({
     isAuthenticated: false,
@@ -9,33 +9,21 @@ const AuthenticatedContext = createContext<AuthenticatedContextType>({
 });
 
 export function AuthenticatedProvider({ children }: { children: ReactNode }) {
-    const [isAuthenticated, setAuthenticated] = useState(() => Boolean(localStorage.getItem('access_token')));
+    const [isAuthenticated, setAuthenticated] = useState(false);
 
-    const login = (token: string, refreshToken: string) => {
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+    const login = (token: string) => {
+        setAccessToken(token);
         setAuthenticated(true);
     };
 
-    const logout = () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+    const logout = async () => {
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+        setAccessToken(null);
         setAuthenticated(false);
     };
 
     useEffect(() => {
-        const checkAuth = () => {
-            if (!localStorage.getItem('access_token')) {
-                setAuthenticated(false);
-                return;
-            }
-
-            GET('/api/user/')
-                .then(res => setAuthenticated(res.status === 200))
-                .catch(() => setAuthenticated(false));
-        };
-
-        checkAuth();
+        tryRefresh().then(token => setAuthenticated(Boolean(token)));
     }, []);
 
     return (

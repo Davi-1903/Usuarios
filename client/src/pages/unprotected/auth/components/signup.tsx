@@ -30,7 +30,7 @@ export default function SignUp({ changeForm }: FormProps) {
         const data = await POST<returnType>('/api/auth/register', form);
 
         if (data.status === 201) {
-            login(data.token, data.refresh_token);
+            login(data.token);
             navigate('/dash');
         } else {
             setMessages(prev => [...prev, { id: prev.length + 1, ok: false, description: data.detail }]);

@@ -29,7 +29,7 @@ export default function SignIn({ changeForm }: FormProps) {
         const data = await POST<responseType>('/api/auth/login', form);
 
         if (data.status === 200) {
-            login(data.token, data.refresh_token);
+            login(data.token);
             navigate('/dash');
         } else {
             setMessages(prev => [...prev, { id: prev.length + 1, ok: false, description: data.detail }]);
